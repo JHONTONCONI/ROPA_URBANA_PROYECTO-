@@ -52,6 +52,9 @@ void buscarProductos() {
             break;
         }
     }
+    if (encontrado == false) {
+        cout << "Producto no encontrado." << endl;
+    }
 }
 
 void actualizarProducto() {
