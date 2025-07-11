@@ -9,6 +9,7 @@ int main() {
     char opcion;
 
     do {
+    	cout<<"hola";
         cout << endl;
         cout << "**************************************************\n";
     	cout << "*                                                *\n";

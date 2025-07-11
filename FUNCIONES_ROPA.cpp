@@ -104,8 +104,6 @@ void actualizarProducto() {
 
 void eliminarProducto() {
 	
-<<<<<<< HEAD
-=======
 	string Nombre;
     cout<< "Ingrese el nombre del producto a eliminar: ";
     cin.ignore();
@@ -122,9 +120,6 @@ void eliminarProducto() {
         }
     }
     cout<< "Producto no encontrado."<<endl;
-	
-	
->>>>>>> 3d8e3ce331cff1afa154ce0ab3bbdede62cd0eba
 }
 
 void realizarUnaVenta() {
