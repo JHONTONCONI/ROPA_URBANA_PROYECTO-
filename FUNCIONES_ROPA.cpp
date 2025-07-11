@@ -33,6 +33,19 @@ void agregarProducto() {
 }
 
 void mostrarProductos() {
+	if (totalProductos == 0) {
+        cout << "No hay productos registrados." << endl;
+        return;
+    }
+
+    cout << "\n========== PRODUCTOS DISPONIBLES ==========\n";
+    for (int i = 0; i < totalProductos; i++) {
+        cout << "Producto " << i + 1 << ":\n";
+        cout << "Nombre: " << productos[i].nombre << endl;
+        cout << "Precio: S/ " << productos[i].precio << endl;
+        cout << "Stock: " << productos[i].stock << endl;
+        cout << "------------------------------------------\n";
+    }
 }
 
 void buscarProductos() {
@@ -42,9 +55,11 @@ void actualizarProducto() {
 }
 
 void eliminarProducto() {
+	
 }
 
 void realizarUnaVenta() {
+	
 }
 
 void mostrarVentasRealizadas() {
