@@ -42,6 +42,25 @@ void actualizarProducto() {
 }
 
 void eliminarProducto() {
+	
+	string Nombre;
+    cout<< "Ingrese el nombre del producto a eliminar: ";
+    cin.ignore();
+    getline(cin, Nombre);
+
+    for (int i = 0; i < totalProductos; i++) {
+        if (productos[i].nombre == Nombre) {
+            for (int j = i; j < totalProductos - 1; j++) {
+                productos[j] = productos[j + 1];
+            }
+            totalProductos--;
+            cout << "Producto eliminado."<<endl;
+            return;
+        }
+    }
+    cout<< "Producto no encontrado."<<endl;
+	
+	
 }
 
 void realizarUnaVenta() {
