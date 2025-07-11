@@ -9,6 +9,12 @@ struct Producto {
     int stock;
 };
 
+struct Venta {
+	string producto; 
+	int cantidad; 
+	float total;
+};
+
 
 void agregarProducto();
 void mostrarProductos();
