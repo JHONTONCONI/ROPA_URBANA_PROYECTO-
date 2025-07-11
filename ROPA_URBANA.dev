@@ -53,7 +53,11 @@ SyncProduct=1
 [Unit1]
 FileName=FUNCIONES.h
 CompileCpp=1
+<<<<<<< HEAD
+Folder=Proyecto 1
+=======
 Folder=
+>>>>>>> 3d8e3ce331cff1afa154ce0ab3bbdede62cd0eba
 Compile=1
 Link=1
 Priority=1000
@@ -63,7 +67,11 @@ BuildCmd=
 [Unit2]
 FileName=FUNCIONES_ROPA.cpp
 CompileCpp=1
+<<<<<<< HEAD
+Folder=Proyecto 1
+=======
 Folder=
+>>>>>>> 3d8e3ce331cff1afa154ce0ab3bbdede62cd0eba
 Compile=1
 Link=1
 Priority=1000
@@ -73,7 +81,11 @@ BuildCmd=
 [Unit3]
 FileName=MAIN_MENU.cpp
 CompileCpp=1
+<<<<<<< HEAD
+Folder=Proyecto 1
+=======
 Folder=
+>>>>>>> 3d8e3ce331cff1afa154ce0ab3bbdede62cd0eba
 Compile=1
 Link=1
 Priority=1000
