@@ -28,7 +28,7 @@ void agregarProducto() {
         totalProductos++;
         cout << "EL producto fue agregado exitosamente."<<endl;
     } else {
-        cout << "Límite de productos alcanzado."<<endl;
+        cout << "Lï¿½mite de productos alcanzado."<<endl;
     }
 }
 
@@ -49,13 +49,82 @@ void mostrarProductos() {
 }
 
 void buscarProductos() {
+	string nombreBuscar;
+    cout << "\n=== BUSCAR PRODUCTO ===" << endl;
+    cout << "Ingrese el nombre del producto a buscar: ";
+    cin.ignore();
+	getline(cin, nombreBuscar);	
+    bool encontrado = false;
+    for (int i = 0; i < totalProductos; i++) {
+        if (productos[i].nombre == nombreBuscar) {
+            cout << "\nProducto encontrado:" << endl;
+            cout << "Nombre: " << productos[i].nombre << endl;
+            cout << "Precio: " << productos[i].precio << endl;
+            cout << "Stock: " << productos[i].stock << endl;
+            encontrado = true;
+            break;
+        }
+    }
+    if (encontrado == false) {
+        cout << "Producto no encontrado." << endl;
+    }
 }
 
 void actualizarProducto() {
+	string nombreBuscar;
+    cout << "\n=== ACTUALIZAR PRODUCTO ===" << endl;
+    cout << "Ingrese el nombre del producto a actualizar: ";
+    cin.ignore();
+    getline(cin, nombreBuscar);
+    
+    bool buscado = false;
+    for (int i = 0; i < totalProductos; i++) {
+        if (productos[i].nombre == nombreBuscar) {
+            cout << "Producto encontrado. Datos actuales:" << endl;
+            cout << "Nombre: " << productos[i].nombre << endl;
+            cout << "Precio: " << productos[i].precio << endl;
+            cout << "Stock: " << productos[i].stock << endl;
+            
+            cout << "\nIngrese los nuevos datos:" << endl;
+            cout << "Nuevo nombre: ";
+            getline(cin, productos[i].nombre);
+            cout << "Nuevo precio: ";
+            cin >> productos[i].precio;
+            cout << "Nuevo stock: ";
+            cin >> productos[i].stock;
+            cout << "Producto actualizado exitosamente!" << endl;
+       		buscado = true;
+       		break;
+	    }
+	}
+	if (buscado == false) {
+    cout << "Producto no encontrado." << endl;
+	}
 }
 
 void eliminarProducto() {
 	
+<<<<<<< HEAD
+=======
+	string Nombre;
+    cout<< "Ingrese el nombre del producto a eliminar: ";
+    cin.ignore();
+    getline(cin, Nombre);
+
+    for (int i = 0; i < totalProductos; i++) {
+        if (productos[i].nombre == Nombre) {
+            for (int j = i; j < totalProductos - 1; j++) {
+                productos[j] = productos[j + 1];
+            }
+            totalProductos--;
+            cout << "Producto eliminado."<<endl;
+            return;
+        }
+    }
+    cout<< "Producto no encontrado."<<endl;
+	
+	
+>>>>>>> 3d8e3ce331cff1afa154ce0ab3bbdede62cd0eba
 }
 
 void realizarUnaVenta() {
