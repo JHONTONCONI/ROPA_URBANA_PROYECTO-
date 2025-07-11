@@ -28,7 +28,7 @@ void agregarProducto() {
         totalProductos++;
         cout << "EL producto fue agregado exitosamente."<<endl;
     } else {
-        cout << "Límite de productos alcanzado."<<endl;
+        cout << "Lï¿½mite de productos alcanzado."<<endl;
     }
 }
 
@@ -61,6 +61,25 @@ void actualizarProducto() {
 }
 
 void eliminarProducto() {
+	
+	string Nombre;
+    cout<< "Ingrese el nombre del producto a eliminar: ";
+    cin.ignore();
+    getline(cin, Nombre);
+
+    for (int i = 0; i < totalProductos; i++) {
+        if (productos[i].nombre == Nombre) {
+            for (int j = i; j < totalProductos - 1; j++) {
+                productos[j] = productos[j + 1];
+            }
+            totalProductos--;
+            cout << "Producto eliminado."<<endl;
+            return;
+        }
+    }
+    cout<< "Producto no encontrado."<<endl;
+	
+	
 }
 
 void realizarUnaVenta() {
