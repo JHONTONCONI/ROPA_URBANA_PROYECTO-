@@ -16,6 +16,10 @@ Producto productos[100] = {
 };
 int totalProductos = 5; 
 
+Venta ventas[100] = {};
+int totalVentas = 0;
+	
+
 void agregarProducto() {
     if (totalProductos < 100) {
         cin.ignore(); 
@@ -28,7 +32,7 @@ void agregarProducto() {
         totalProductos++;
         cout << "EL producto fue agregado exitosamente."<<endl;
     } else {
-        cout << "L�mite de productos alcanzado."<<endl;
+        cout << "Limite de productos alcanzado."<<endl;
     }
 }
 
@@ -115,6 +119,18 @@ void realizarUnaVenta() {
 }
 
 void mostrarVentasRealizadas() {
+	cout<<"\n=== VENTAS REALIZADAS ==="<<endl;
+	if (totalVentas == 0){
+		cout<<"Todavia no se a realizado ventas"<<endl;
+		return;
+	}
+	for (int i=0;i<totalVentas; i++){
+		cout << "\nVenta #" << i + 1 << ":" << endl;
+        cout << "Producto: " << ventas[i].producto << endl;
+        cout << "Cantidad: " << ventas[i].cantidad << endl;
+        cout << "Total: S/ " << ventas[i].total << endl;
+	}
+	
 }
 
 void calcularTotalDeVentas() {
