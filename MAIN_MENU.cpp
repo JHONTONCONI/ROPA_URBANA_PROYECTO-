@@ -6,10 +6,11 @@ using namespace std;
 
 
 int main() {
+	SetConsoleOutputCP(1252);
+	login();
     char opcion;
 
     do {
-    	cout<<"hola mundo como estan";
         cout << endl;
         cout << "**************************************************\n";
     	cout << "*                                                *\n";

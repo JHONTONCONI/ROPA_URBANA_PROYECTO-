@@ -1,5 +1,8 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
+#include <cstdlib> 
+#include <stdlib.h>   
+#include <windows.h>
 #include<iostream>
 using namespace std;
 
@@ -24,5 +27,7 @@ void eliminarProducto();
 void realizarUnaVenta();
 void mostrarVentasRealizadas();
 void calcularTotalDeVentas();
+void login();
+
 
 #endif

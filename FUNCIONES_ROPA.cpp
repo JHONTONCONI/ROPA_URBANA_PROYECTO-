@@ -193,3 +193,51 @@ void mostrarVentasRealizadas() {
 void calcularTotalDeVentas() {
 }
 
+
+
+
+
+
+
+
+
+
+
+
+void login() {
+    string contrasenaReal = "toxo123";
+    string intento;
+
+    while (true) {
+        system("cls");  // Limpia la pantalla antes de cada intento
+
+        cout << "==========================================" << endl;
+        cout << "           TOXO TIENDA LOGIN              " << endl;
+        cout<<  "                -LOGIN-                    " << endl;
+        cout << "==========================================" << endl;
+        cout << "| Ingrese la contraseña para continuar   |" << endl;
+        cout << "------------------------------------------" << endl;
+        cout << "\n> Contraseña: ";
+        getline(cin, intento);
+
+        if (intento == contrasenaReal) {
+            cout << "\n? Acceso concedido. Bienvenido al sistema." << endl;
+            Sleep(1500); 
+            system("cls");
+            return;
+        } else {
+            cout << "\n? Contraseña incorrecta." << endl;
+            cout << "? Inténtelo nuevamente..." << endl;
+            Sleep(1500);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
