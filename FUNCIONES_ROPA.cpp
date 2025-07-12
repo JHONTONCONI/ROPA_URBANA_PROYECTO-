@@ -2,10 +2,6 @@
 #include "funciones.h"
 using namespace std;
 
-#include <iostream>
-#include "funciones.h"
-using namespace std;
-
 
 Producto productos[100] = {
     {"Polera Oversize", 89.90, 10},
@@ -52,15 +48,32 @@ void mostrarProductos() {
         return;
     }
     char respuesta;
-    cout << "\n¿Desea ver los productos ordenados alfabéticamente? (S/N): ";
+    cout << "\n¿Desea ver los productos ordenados? (S/N): ";
     cin >> respuesta;
     respuesta = toupper(respuesta);  
     if (respuesta == 'S') {
-        cout << "\nProductos Ordenados Alfabeticamente: \n";
+    	int opcion;
+        cout << "\n¿Cómo desea ordenarlos?" << endl;
+        cout << "1. Por nombre (A-Z)" << endl;
+        cout << "2. Por precio (menor a mayor)" << endl;
+        cout << "3. Por stock (menor a mayor)" << endl;
+        cout << "Ingrese una opción (1-3): ";
+        cin >> opcion;
 
         for (int i = 0; i < totalProductos - 1; i++) {
             for (int j = 0; j < totalProductos - i - 1; j++) {
-                if (aMinuscula(productos[j].nombre) > aMinuscula(productos[j + 1].nombre)) {
+            	
+                bool debeIntercambiar = false;
+
+                if (opcion == 1 && aMinuscula(productos[j].nombre) > aMinuscula(productos[j + 1].nombre)) {
+                    debeIntercambiar = true;
+                } else if (opcion == 2 && productos[j].precio > productos[j + 1].precio) {
+                    debeIntercambiar = true;
+                } else if (opcion == 3 && productos[j].stock > productos[j + 1].stock) {
+                    debeIntercambiar = true;
+                }
+
+                if (debeIntercambiar) {
                     
                     Producto temp;
                     temp.nombre = productos[j].nombre;
