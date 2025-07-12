@@ -6,6 +6,8 @@ using namespace std;
 
 
 int main() {
+	SetConsoleOutputCP(1252);
+	login();
     char opcion;
 
     do {
