@@ -36,12 +36,45 @@ void agregarProducto() {
     }
 }
 
+string aMinuscula(string texto) {
+    for (int i = 0; i < texto.length(); i++) {
+        texto[i] = tolower(texto[i]);
+    }
+    return texto;
+}
+
 void mostrarProductos() {
 	if (totalProductos == 0) {
         cout << "No hay productos registrados." << endl;
         return;
     }
+    char respuesta;
+    cout << "\n¿Desea ver los productos ordenados alfabéticamente? (S/N): ";
+    cin >> respuesta;
+    respuesta = toupper(respuesta);  
+    if (respuesta == 'S') {
+        cout << "\nProductos Ordenados Alfabeticamente: \n";
 
+        for (int i = 0; i < totalProductos - 1; i++) {
+            for (int j = 0; j < totalProductos - i - 1; j++) {
+                if (aMinuscula(productos[j].nombre) > aMinuscula(productos[j + 1].nombre)) {
+                    
+                    Producto temp;
+                    temp.nombre = productos[j].nombre;
+                    temp.precio = productos[j].precio;
+                    temp.stock = productos[j].stock;
+
+                    productos[j].nombre = productos[j + 1].nombre;
+                    productos[j].precio = productos[j + 1].precio;
+                    productos[j].stock = productos[j + 1].stock;
+
+                    productos[j + 1].nombre = temp.nombre;
+                    productos[j + 1].precio = temp.precio;
+                    productos[j + 1].stock = temp.stock;
+                }
+            }
+        }
+    }
     cout << "\n========== PRODUCTOS DISPONIBLES ==========\n";
     for (int i = 0; i < totalProductos; i++) {
         cout << "Producto " << i + 1 << ":\n";
