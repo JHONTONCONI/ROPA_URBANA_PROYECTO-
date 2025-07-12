@@ -31,8 +31,10 @@ void agregarProducto() {
         cin >> productos[totalProductos].stock;
         totalProductos++;
         cout << "EL producto fue agregado exitosamente."<<endl;
+        system("pause");
     } else {
         cout << "Limite de productos alcanzado."<<endl;
+        system("pause");
     }
 }
 
@@ -46,6 +48,7 @@ string aMinuscula(string texto) {
 void mostrarProductos() {
 	if (totalProductos == 0) {
         cout << "No hay productos registrados." << endl;
+        system("pause");
         return;
     }
     char respuesta;
@@ -83,6 +86,7 @@ void mostrarProductos() {
         cout << "Stock: " << productos[i].stock << endl;
         cout << "------------------------------------------\n";
     }
+    system("pause");
 }
 
 void buscarProductos() {
@@ -105,6 +109,7 @@ void buscarProductos() {
     if (encontrado == false) {
         cout << "Producto no encontrado." << endl;
     }
+    system("pause");
 }
 
 void actualizarProducto() {
@@ -137,6 +142,7 @@ void actualizarProducto() {
 	if (buscado == false) {
     cout << "Producto no encontrado." << endl;
 	}
+	system("pause");
 }
 
 void eliminarProducto() {
@@ -153,10 +159,12 @@ void eliminarProducto() {
             }
             totalProductos--;
             cout << "Producto eliminado."<<endl;
+            system("pause");
             return;
         }
     }
     cout<< "Producto no encontrado."<<endl;
+    system("pause");
 }
 
 void realizarUnaVenta() {
@@ -166,6 +174,7 @@ void realizarUnaVenta() {
     
 	if (totalProductos == 0) {
         cout << "No hay productos registrados." << endl;
+        system("pause");
         return;
     }
 
@@ -197,6 +206,7 @@ void realizarUnaVenta() {
                 cout << "Total a pagar: S/ " << total << endl;
             } else {
                 cout << "Stock insuficiente." << endl;
+                system("pause");
             }
 
             break;
@@ -205,6 +215,7 @@ void realizarUnaVenta() {
 
     if (!encontrado) {
         cout << "Producto no encontrado." << endl;
+        system("pause");
     }
 }
 
@@ -212,6 +223,7 @@ void mostrarVentasRealizadas() {
 	cout<<"\n=== VENTAS REALIZADAS ==="<<endl;
 	if (totalVentas == 0){
 		cout<<"Todavia no se a realizado ventas"<<endl;
+		system("pause");
 		return;
 	}
 	for (int i=0;i<totalVentas; i++){
@@ -227,6 +239,7 @@ void calcularTotalDeVentas() {
 	cout << "\n=== TOTAL DE VENTAS ===" << endl;
     if (totalVentas == 0) {
         cout << "No se ha realizado ninguna venta." << endl;
+        system("pause");
         return;
     }
 
@@ -236,18 +249,8 @@ void calcularTotalDeVentas() {
     }
 
     cout << "El total acumulado de todas las ventas es: S/ " << sumaTotal << endl;
+    system("pause");
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 void login() {
