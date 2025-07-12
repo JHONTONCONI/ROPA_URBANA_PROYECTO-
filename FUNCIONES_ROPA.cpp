@@ -17,21 +17,29 @@ int totalVentas = 0;
 	
 
 void agregarProducto() {
-    if (totalProductos < 100) {
-        cin.ignore(); 
-        cout << "Nombre del producto: ";
-        getline(cin, productos[totalProductos].nombre);
-        cout << "Precio: ";
-        cin >> productos[totalProductos].precio;
-        cout << "Stock: ";
-        cin >> productos[totalProductos].stock;
-        totalProductos++;
-        cout << "EL producto fue agregado exitosamente."<<endl;
-        system("pause");
-    } else {
-        cout << "Limite de productos alcanzado."<<endl;
-        system("pause");
-    }
+	char seguir;
+	do{
+	    if (totalProductos < 100) {
+	        cin.ignore(); 
+	        cout << "Nombre del producto: ";
+	        getline(cin, productos[totalProductos].nombre);
+	        cout << "Precio: ";
+	        cin >> productos[totalProductos].precio;
+	        cout << "Stock: ";
+	        cin >> productos[totalProductos].stock;
+	        totalProductos++;
+	        cout << "EL producto fue agregado exitosamente."<<endl;
+	        system("pause");
+	    } else {
+	        cout << "Limite de productos alcanzado."<<endl;
+	        system("pause");
+	        break;
+	    }
+	    cout << "\n¿Desea agregar otro producto? (S/N): ";
+        cin >> seguir;
+        seguir = toupper(seguir);
+	}while (seguir == 'S');
+	system("pause");
 }
 
 string aMinuscula(string texto) {
