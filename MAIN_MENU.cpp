@@ -16,7 +16,7 @@ int main() {
     	cout << "*                                                *\n";
     	cout << "*        BIENVENIDO A LA TIENDA URBANA           *\n";
     	cout << "*                                                *\n";
-    	cout << "*           << STAY FRESH, STAY COOL >>          *\n";
+    	cout << "*               << TOXSTYLE >>                   *\n";
     	cout << "*                                                *\n";
     	cout << "**************************************************\n\n";
         cout << endl;
