@@ -191,7 +191,20 @@ void mostrarVentasRealizadas() {
 }
 
 void calcularTotalDeVentas() {
+	cout << "\n=== TOTAL DE VENTAS ===" << endl;
+    if (totalVentas == 0) {
+        cout << "No se ha realizado ninguna venta." << endl;
+        return;
+    }
+
+    float sumaTotal = 0;
+    for (int i = 0; i < totalVentas; i++) {
+        sumaTotal += ventas[i].total;
+    }
+
+    cout << "El total acumulado de todas las ventas es: S/ " << sumaTotal << endl;
 }
+
 
 
 
