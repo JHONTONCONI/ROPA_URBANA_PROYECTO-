@@ -453,6 +453,7 @@ void realizarUnaVenta() {
 
 //Funcion para mostrar las ventas 
 void mostrarVentasRealizadas() {
+	cin.ignore();
 	system("cls");
     cout << "\n============================================" << endl;
     cout << "               VENTAS REALIZADAS            " << endl;
@@ -461,8 +462,19 @@ void mostrarVentasRealizadas() {
     if (totalVentas == 0){
         cout << "\nTodavía no se ha realizado ninguna venta." << endl;
         cout << "============================================" << endl;
-        system("pause");
-        return;
+        string Retorno;
+		cout<<"\nRegresar al menu principal.......[1]"<<endl;	    
+	    do{
+			cout<<">";
+			getline(cin, Retorno);
+			if(Retorno != "1"){
+			   	cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
+			}
+		}while(Retorno != "1");
+		cout<<"\nRegresando al menu..."<<endl;
+		Sleep(1000);
+		system("cls");
+		return;
     }
 
     for (int i = 0; i < totalVentas; i++) {
@@ -472,15 +484,15 @@ void mostrarVentasRealizadas() {
         cout << "Total    : S/ " << ventas[i].total << endl;
         cout << "--------------------------------------------" << endl;
     }
-	string Retorno;
+	string Retorn;
 	cout<<"\nRegresar al menu principal.......[1]"<<endl;	    
     do{
 		cout<<"> ";
-		getline(cin, Retorno);
-		if(Retorno != "1"){
+		getline(cin, Retorn);
+		if(Retorn != "1"){
 		   	cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
 		}
-	}while(Retorno != "1");
+	}while(Retorn != "1");
 	cout<<"\nRegresando al menu..."<<endl;
 	Sleep(1000);
 	system("cls");
