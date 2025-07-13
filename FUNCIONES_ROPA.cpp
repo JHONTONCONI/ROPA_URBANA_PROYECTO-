@@ -17,33 +17,57 @@ int totalVentas = 0;
 	
 
 void agregarProducto() {
-	char seguir;
-	do{
-	    if (totalProductos < 100) {
-	        cin.ignore(); 
-	        cout << "Nombre del producto: ";
-	        getline(cin, productos[totalProductos].nombre);
-	        cout << "Precio: ";
-	        cin >> productos[totalProductos].precio;
-	        cout << "Stock: ";
-	        cin >> productos[totalProductos].stock;
-	        totalProductos++;
-	        cout << "EL producto fue agregado exitosamente."<<endl;
-	        //system("pause");
-	    } else {
-	        cout << "Limite de productos alcanzado."<<endl;
-	        //system("pause");
-	        break;
-	    }
-	    cout << "\n¿Desea agregar otro producto? (S/N): ";
+    char seguir;
+    do {
+        if (totalProductos < 100) {
+            cin.ignore();
+            
+            do {
+                cout << "Nombre del producto: ";
+                getline(cin, productos[totalProductos].nombre);
+                if (productos[totalProductos].nombre == "") {
+                    cout << "El nombre no puede estar vacío. Intente de nuevo.\n";
+                }
+            } while (productos[totalProductos].nombre == "");
+            
+            do {
+                cout << "Precio: ";
+                cin >> productos[totalProductos].precio;
+                if (productos[totalProductos].precio <= 0) {
+                    cout << "El precio debe ser mayor que 0. Intente de nuevo.\n";
+                }
+            } while (productos[totalProductos].precio <= 0);
+
+            do {
+                cout << "Stock: ";
+                cin >> productos[totalProductos].stock;
+                if (productos[totalProductos].stock < 0) {
+                    cout << "El stock no puede ser negativo. Intente de nuevo.\n";
+                }
+            } while (productos[totalProductos].stock < 0);
+
+            totalProductos++;
+            cout << "EL producto fue agregado exitosamente." << endl;
+            //system("pause");
+
+        } else {
+            cout << "Limite de productos alcanzado." << endl;
+            //system("pause");
+            break;
+        }
+
+        cout << "\n¿Desea agregar otro producto? (S/N): ";
         cin >> seguir;
         seguir = toupper(seguir);
-	}while (seguir == 'S');
-	cout<<"\nRegresando al menu..."<<endl;
-	Sleep(1000);
-	//system("pause");
-	system("cls");
+
+    } while (seguir == 'S');
+
+    cout << "\nRegresando al menu..." << endl;
+    Sleep(1000);
+    //system("pause");
+    system("cls");
 }
+
 
 string aMinuscula(string texto) {
     for (int i = 0; i < texto.length(); i++) {
@@ -64,23 +88,25 @@ void mostrarProductos() {
     cin >> respuesta;
     respuesta = toupper(respuesta);  
     if (respuesta == 'S') {
-    	int opcion;
-    	
-    	do{
+		char opcionChar;
+		int opcion;
+		do {
     		cout << "\n¿Cómo desea ordenarlos?" << endl;
-        	cout << "1. Por nombre (A-Z)" << endl;
-        	cout << "2. Por precio (menor a mayor)" << endl;
-        	cout << "3. Por stock (menor a mayor)" << endl;
-        	cout << "Ingrese una opción (1-3): ";
-        	cin >> opcion;
-    		
-    		if(opcion<1 || opcion>3){
-    			cout<<"\n---------------------------------------------------"<<endl;
-    			cout<<"Opción inválida, vuelva a digitar un numero (1-3)"<<endl;
-    			cout<<"---------------------------------------------------"<<endl;
+    		cout << "1. Por nombre (A-Z)" << endl;
+    		cout << "2. Por precio (menor a mayor)" << endl;
+   			cout << "3. Por stock (menor a mayor)" << endl;
+    		cout << "Ingrese una opción (1-3): ";
+    		cin >> opcionChar;
+
+   			if (opcionChar == '1' || opcionChar == '2' || opcionChar == '3') {
+        		opcion = opcionChar - '0';  // convertir char a int
+        		break;
+    		} else {
+        		cout << "\n---------------------------------------------------" << endl;
+        		cout << "Opción inválida, vuelva a digitar un número (1-3)" << endl;
+        		cout << "---------------------------------------------------" << endl;
     		}
-    	}while(opcion<1 || opcion>3);
-        
+		} while (true);
 
         for (int i = 0; i < totalProductos - 1; i++) {
             for (int j = 0; j < totalProductos - i - 1; j++) {
@@ -122,6 +148,7 @@ void mostrarProductos() {
         cout << "------------------------------------------\n";
     }
     cout<<"\nRegresar al menu principal.......[1]"<<endl;
+    cin.ignore();
     do{
     	cin>>RetornoMenu;
     	if(RetornoMenu != '1'){
