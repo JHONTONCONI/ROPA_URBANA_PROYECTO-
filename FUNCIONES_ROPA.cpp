@@ -57,14 +57,12 @@ void agregarProducto() {
 
             totalProductos++;
             cout << "EL producto fue agregado exitosamente." << endl;
-            //system("pause");
 
         } else {
             cout << "Limite de productos alcanzado." << endl;
             //system("pause");
             break;
         }
-
         cout << "\n¿Desea agregar otro producto? (S/N): ";
         cin >> seguir;
         seguir = toupper(seguir);
@@ -112,6 +110,7 @@ void mostrarProductos() {
 		char opcionChar;
 		int opcion;
 		do {
+			system("cls");
     		cout << "\n¿Cómo desea ordenarlos?" << endl;
     		cout << "1. Por nombre (A-Z)" << endl;
     		cout << "2. Por precio (menor a mayor)" << endl;
@@ -126,7 +125,8 @@ void mostrarProductos() {
 				cout << "\n---------------------------------------------------" << endl;
 				cout << "Opción inválida, vuelva a digitar un número (1-3)" << endl;
 				cout << "---------------------------------------------------" << endl;
-				
+				system("pause");
+    
 			}
    			
 		} while (true);
