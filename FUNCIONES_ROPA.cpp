@@ -223,6 +223,10 @@ void realizarUnaVenta() {
             if (cantidad <= productos[i].stock) {
                 productos[i].stock -= cantidad;
                 float total = cantidad * productos[i].precio;
+                ventas[totalVentas].producto = productos[i].nombre;
+                ventas[totalVentas].cantidad = cantidad;
+                ventas[totalVentas].total = total;
+                totalVentas++;
                 cout << "Venta realizada con éxito." << endl;
                 cout << "Total a pagar: S/ " << total << endl;
             } else {
