@@ -93,10 +93,19 @@ void mostrarProductos() {
         system("pause");
         return;
     }
-    char respuesta;
-    cout << "\n¿Desea ver los productos ordenados? (S/N): ";
-    cin >> respuesta;
-    respuesta = toupper(respuesta);  
+    
+	char respuesta;
+	do {
+    	cout << "\n¿Desea ver los productos ordenados? (S/N): ";
+    	cin >> respuesta;
+    	respuesta = toupper(respuesta);
+    	if (respuesta != 'S' && respuesta != 'N') {
+        	cout << "\n---------------------------------------------------" << endl;
+        	cout << "Opción inválida. Debe digitar S o N." << endl;
+        	cout << "---------------------------------------------------" << endl;
+    	}
+	} while (respuesta != 'S' && respuesta != 'N');
+
     if (respuesta == 'S') {
 		char opcionChar;
 		int opcion;
