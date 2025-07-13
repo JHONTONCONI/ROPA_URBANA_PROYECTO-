@@ -364,7 +364,7 @@ void realizarUnaVenta() {
         system("pause");
         return;
     }
-
+	system("cls");
     cout << "\n========== PRODUCTOS ACTUALES ==========\n";
     for (int i = 0; i < totalProductos; i++) {
         cout << "Producto " << i + 1 << ":\n";
@@ -373,7 +373,7 @@ void realizarUnaVenta() {
         cout << "Stock: " << productos[i].stock << endl;
         cout << "------------------------------------------\n";
     }
-
+	cout << "\n=== VENTA DE PRODUCTO ===" << endl;
     cout << "Ingrese el nombre del producto a vender: ";
     getline(cin, nombreBuscado);
 
@@ -413,16 +413,26 @@ void realizarUnaVenta() {
                 cout << "¡Gracias por comprar en nuestra tienda!" << endl;
                 cout << "Valoramos mucho tu preferencia." << endl;
                 cout << "------------------------------------------\n\n";
-                system("pause");
             } else {
                 cout << "Stock insuficiente." << endl;
-                system("pause");
             }
 
-            break;
+           	string Retorno;
+		    cout<<"\nRegresar al menu principal.......[1]"<<endl;
+		    
+		    do{
+		    	cout<<"> ";
+		    	cin.ignore();
+		    	getline(cin, Retorno);
+		    	if(Retorno != "1"){
+		    		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
+		    	}
+		    }while(Retorno != "1");
+			    cout<<"\nRegresando al menu..."<<endl;
+				Sleep(1000);
+				system("cls");
+			}
         }
-    }
-
     if (!encontrado) {
         cout << "\n-----------------------------------" << endl;
         cout << "¡Error! Producto no encontrado." << endl;
@@ -433,6 +443,7 @@ void realizarUnaVenta() {
 
 //Funcion para mostrar las ventas 
 void mostrarVentasRealizadas() {
+	system("cls");
     cout << "\n============================================" << endl;
     cout << "               VENTAS REALIZADAS            " << endl;
     cout << "============================================" << endl;
