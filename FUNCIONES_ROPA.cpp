@@ -1,5 +1,6 @@
 #include <iostream>
 #include "funciones.h"
+#include <cmath>
 using namespace std;
 
 
@@ -54,19 +55,25 @@ void agregarProducto() {
                 }
             } while (productos[totalProductos].precio <= 0);
 
+            float stockTemp;
             do {
                 cout << "Stock: ";
-                if (!(cin >> productos[totalProductos].stock)) {
-                    cout << "Entrada inválida. Debe ingresar un número. Intente de nuevo.\n";
+                if (!(cin >> stockTemp)) {
+                    cout << "Entrada inválida. Debe ingresar un número entero. Intente de nuevo.\n";
                     cin.clear();
                     cin.ignore(1000, '\n');
-                    productos[totalProductos].stock = -1; // Forzar iteración
                     continue;
                 }
-                if (productos[totalProductos].stock < 0) {
-                    cout << "El stock no puede ser negativo. Intente de nuevo.\n";
+
+                if (stockTemp < 0 || fmod(stockTemp, 1) != 0) {
+                    cout << "El stock debe ser un número entero no negativo. Intente de nuevo.\n";
+                    continue;
                 }
-            } while (productos[totalProductos].stock < 0);
+
+                productos[totalProductos].stock = stockTemp;
+                break;
+
+            } while (true);
 
             totalProductos++;
             cout << "EL producto fue agregado exitosamente." << endl;
