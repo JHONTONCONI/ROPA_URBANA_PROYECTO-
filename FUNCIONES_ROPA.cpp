@@ -442,9 +442,13 @@ void mostrarVentasRealizadas() {
 
 //Funcion para calcular el total de ventas 
 void calcularTotalDeVentas() {
-	cout << "\n=== TOTAL DE VENTAS ===" << endl;
+    cout << "\n============================================" << endl;
+    cout << "               TOTAL DE VENTAS              " << endl;
+    cout << "============================================" << endl;
+
     if (totalVentas == 0) {
-        cout << "No se ha realizado ninguna venta." << endl;
+        cout << "\nNo se ha realizado ninguna venta." << endl;
+        cout << "============================================" << endl;
         system("pause");
         return;
     }
@@ -454,7 +458,8 @@ void calcularTotalDeVentas() {
         sumaTotal += ventas[i].total;
     }
 
-    cout << "El total acumulado de todas las ventas es: S/ " << sumaTotal << endl;
+    cout << "\nEl total acumulado de todas las ventas es: S/ " << sumaTotal << endl;
+    cout << "============================================" << endl;
     system("pause");
 }
 
