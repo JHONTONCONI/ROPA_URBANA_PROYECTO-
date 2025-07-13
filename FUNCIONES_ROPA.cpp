@@ -376,7 +376,6 @@ void realizarUnaVenta() {
 	cout << "\n=== VENTA DE PRODUCTO ===" << endl;
     cout << "Ingrese el nombre del producto a vender: ";
     getline(cin, nombreBuscado);
-
     bool encontrado = false;
 
     for (int i = 0; i < totalProductos; i++) {
@@ -422,7 +421,6 @@ void realizarUnaVenta() {
 		    
 		    do{
 		    	cout<<"> ";
-		    	cin.ignore();
 		    	getline(cin, Retorno);
 		    	if(Retorno != "1"){
 		    		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
@@ -434,11 +432,23 @@ void realizarUnaVenta() {
 			}
         }
     if (!encontrado) {
+    	system("cls");
         cout << "\n-----------------------------------" << endl;
         cout << "¡Error! Producto no encontrado." << endl;
         cout << "-----------------------------------" << endl;
-        system("pause");
-    }
+        string Retorno;
+		cout<<"\nRegresar al menu principal.......[1]"<<endl;	    
+	    do{
+			cout<<">";
+			getline(cin, Retorno);
+			if(Retorno != "1"){
+			   	cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
+			}
+		}while(Retorno != "1");
+		cout<<"\nRegresando al menu..."<<endl;
+		Sleep(1000);
+		system("cls");
+	}
 }
 
 //Funcion para mostrar las ventas 
@@ -462,8 +472,18 @@ void mostrarVentasRealizadas() {
         cout << "Total    : S/ " << ventas[i].total << endl;
         cout << "--------------------------------------------" << endl;
     }
-
-    system("pause");
+	string Retorno;
+	cout<<"\nRegresar al menu principal.......[1]"<<endl;	    
+    do{
+		cout<<"> ";
+		getline(cin, Retorno);
+		if(Retorno != "1"){
+		   	cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
+		}
+	}while(Retorno != "1");
+	cout<<"\nRegresando al menu..."<<endl;
+	Sleep(1000);
+	system("cls");
 }
 
 
