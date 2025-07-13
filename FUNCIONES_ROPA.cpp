@@ -221,7 +221,9 @@ void actualizarProducto() {
     bool buscado = false;
     for (int i = 0; i < totalProductos; i++) {
         if (productos[i].nombre == nombreBuscar) {
-            cout << "Producto encontrado. Datos actuales:" << endl;
+        	cout << endl;
+            cout << "***Producto encontrado***"<<endl; 
+			cout << "Datos actuales:" << endl;
             cout << "Nombre: " << productos[i].nombre << endl;
             cout << "Precio: " << productos[i].precio << endl;
             cout << "Stock: " << productos[i].stock << endl;
@@ -243,7 +245,21 @@ void actualizarProducto() {
     cout << "¡Error! Producto no encontrado." << endl;
     cout << "-----------------------------------" << endl;
 	}
-	system("pause");
+	
+	string Retorno;
+    cout<<"\nRegresar al menu principal.......[1]"<<endl;
+    cin.ignore();
+    do{
+    	getline(cin, Retorno);
+    	if(Retorno != "1"){
+    		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
+    	}
+    }while(Retorno != "1");
+    
+	
+    cout<<"\nRegresando al menu..."<<endl;
+	Sleep(1000);
+	system("cls");
 }
 
 //Funcion para eliminar un productos
