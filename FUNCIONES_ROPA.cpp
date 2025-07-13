@@ -17,9 +17,9 @@ Venta ventas[100] = {};
 int totalVentas = 0;
 	
 
-//Funcion para agregaar productos
+//Funcion para agregar productos
 void agregarProducto() {
-	system("cls");
+    system("cls");
     char seguir;
     cout << "=========================================\n";
     cout << " SE AGREGARÁN PRODUCTOS AL INVENTARIO\n";
@@ -41,7 +41,14 @@ void agregarProducto() {
             
             do {
                 cout << "Precio: ";
-                cin >> productos[totalProductos].precio;
+                if (!(cin >> productos[totalProductos].precio)) {
+                    cout << "Entrada inválida. Debe ingresar un número. Intente de nuevo.\n";
+                    cin.clear();
+                    // Limpiar el buffer de entrada (usamos 1000 como número grande arbitrario)
+                    cin.ignore(1000, '\n');
+                    productos[totalProductos].precio = -1; // Forzar iteración
+                    continue;
+                }
                 if (productos[totalProductos].precio <= 0) {
                     cout << "El precio debe ser mayor que 0. Intente de nuevo.\n";
                 }
@@ -49,7 +56,13 @@ void agregarProducto() {
 
             do {
                 cout << "Stock: ";
-                cin >> productos[totalProductos].stock;
+                if (!(cin >> productos[totalProductos].stock)) {
+                    cout << "Entrada inválida. Debe ingresar un número. Intente de nuevo.\n";
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    productos[totalProductos].stock = -1; // Forzar iteración
+                    continue;
+                }
                 if (productos[totalProductos].stock < 0) {
                     cout << "El stock no puede ser negativo. Intente de nuevo.\n";
                 }
@@ -60,18 +73,17 @@ void agregarProducto() {
 
         } else {
             cout << "Limite de productos alcanzado." << endl;
-            //system("pause");
             break;
         }
         cout << "\n¿Desea agregar otro producto? (S/N): ";
         cin >> seguir;
+        cin.ignore(1000, '\n'); // Limpiar el buffer
         seguir = toupper(seguir);
 
     } while (seguir == 'S');
 
     cout << "\nRegresando al menu..." << endl;
     Sleep(1000);
-    //system("pause");
     system("cls");
 }
 
