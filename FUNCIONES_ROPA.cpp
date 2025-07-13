@@ -325,8 +325,15 @@ void eliminarProducto() {
         if (productos[i].nombre == Nombre) {
             //Confirmar eliminar producto
             char confirmar;
-            cout << "¿Está seguro de eliminar el producto '" << Nombre << "'? (S/N): ";
-            cin >> confirmar;
+            do {
+                cout << "¿Está seguro de eliminar el producto '" << Nombre << "'? (S/N): ";
+                cin >> confirmar;
+                confirmar = toupper(confirmar);
+                if (confirmar != 'S' && confirmar != 'N') {
+                    cout << "Opción inválida. Debe ingresar S o N.\n";
+                }
+            } while (confirmar != 'S' && confirmar != 'N');
+            
             if (toupper(confirmar) != 'S') {
                 cout << "Eliminación cancelada." << endl;
                 cout<<"Regregando al MENU principal....";
