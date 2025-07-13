@@ -100,15 +100,16 @@ void mostrarProductos() {
    			cout << "3. Por stock (menor a mayor)" << endl;
     		cout << "Ingrese una opción (1-3): ";
     		cin >> opcionChar;
-
-   			if (opcionChar == '1' || opcionChar == '2' || opcionChar == '3') {
-        		opcion = opcionChar - '0';  // convertir char a int
-        		break;
-    		} else {
-        		cout << "\n---------------------------------------------------" << endl;
-        		cout << "Opción inválida, vuelva a digitar un número (1-3)" << endl;
-        		cout << "---------------------------------------------------" << endl;
-    		}
+			
+			if(opcion == '1' || opcionChar == '2' || opcionChar == '3'){
+				opcion = opcionChar - '0';
+				break;
+			}else{
+				cout << "\n---------------------------------------------------" << endl;
+				cout << "Opción inválida, vuelva a digitar un número (1-3)" << endl;
+				cout << "---------------------------------------------------" << endl;
+			}
+   			
 		} while (true);
 
         for (int i = 0; i < totalProductos - 1; i++) {
