@@ -96,6 +96,7 @@ void mostrarProductos() {
     
 	char respuesta;
 	do {
+		system("cls");
     	cout << "\n¿Desea ver los productos ordenados? (S/N): ";
     	cin >> respuesta;
     	respuesta = toupper(respuesta);
@@ -103,6 +104,7 @@ void mostrarProductos() {
         	cout << "\n---------------------------------------------------" << endl;
         	cout << "Opción inválida. Debe digitar S o N." << endl;
         	cout << "---------------------------------------------------" << endl;
+        	system("pause");
     	}
 	} while (respuesta != 'S' && respuesta != 'N');
 
@@ -124,6 +126,7 @@ void mostrarProductos() {
 				cout << "\n---------------------------------------------------" << endl;
 				cout << "Opción inválida, vuelva a digitar un número (1-3)" << endl;
 				cout << "---------------------------------------------------" << endl;
+				
 			}
    			
 		} while (true);
@@ -159,6 +162,7 @@ void mostrarProductos() {
             }
         }
     }
+    system("cls");
     cout << "\n========== PRODUCTOS DISPONIBLES ==========\n";
     for (int i = 0; i < totalProductos; i++) {
         cout << "Producto " << i + 1 << ":\n";
