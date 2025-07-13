@@ -29,17 +29,20 @@ void agregarProducto() {
 	        cin >> productos[totalProductos].stock;
 	        totalProductos++;
 	        cout << "EL producto fue agregado exitosamente."<<endl;
-	        system("pause");
+	        //system("pause");
 	    } else {
 	        cout << "Limite de productos alcanzado."<<endl;
-	        system("pause");
+	        //system("pause");
 	        break;
 	    }
 	    cout << "\n¿Desea agregar otro producto? (S/N): ";
         cin >> seguir;
         seguir = toupper(seguir);
 	}while (seguir == 'S');
-	system("pause");
+	cout<<"\nRegresando al menu..."<<endl;
+	Sleep(1000);
+	//system("pause");
+	system("cls");
 }
 
 string aMinuscula(string texto) {
@@ -50,6 +53,7 @@ string aMinuscula(string texto) {
 }
 
 void mostrarProductos() {
+	char RetornoMenu;
 	if (totalProductos == 0) {
         cout << "No hay productos registrados." << endl;
         system("pause");
@@ -61,12 +65,22 @@ void mostrarProductos() {
     respuesta = toupper(respuesta);  
     if (respuesta == 'S') {
     	int opcion;
-        cout << "\n¿Cómo desea ordenarlos?" << endl;
-        cout << "1. Por nombre (A-Z)" << endl;
-        cout << "2. Por precio (menor a mayor)" << endl;
-        cout << "3. Por stock (menor a mayor)" << endl;
-        cout << "Ingrese una opción (1-3): ";
-        cin >> opcion;
+    	
+    	do{
+    		cout << "\n¿Cómo desea ordenarlos?" << endl;
+        	cout << "1. Por nombre (A-Z)" << endl;
+        	cout << "2. Por precio (menor a mayor)" << endl;
+        	cout << "3. Por stock (menor a mayor)" << endl;
+        	cout << "Ingrese una opción (1-3): ";
+        	cin >> opcion;
+    		
+    		if(opcion<1 || opcion>3){
+    			cout<<"\n---------------------------------------------------"<<endl;
+    			cout<<"Opción inválida, vuelva a digitar un numero (1-3)"<<endl;
+    			cout<<"---------------------------------------------------"<<endl;
+    		}
+    	}while(opcion<1 || opcion>3);
+        
 
         for (int i = 0; i < totalProductos - 1; i++) {
             for (int j = 0; j < totalProductos - i - 1; j++) {
@@ -107,7 +121,18 @@ void mostrarProductos() {
         cout << "Stock: " << productos[i].stock << endl;
         cout << "------------------------------------------\n";
     }
-    system("pause");
+    cout<<"\nRegresar al menu principal.......[1]"<<endl;
+    do{
+    	cin>>RetornoMenu;
+    	if(RetornoMenu != '1'){
+    		cout<<"Opcion invalida. Para regresar al MENU digite [1]"<<endl;
+    	}
+    }while(RetornoMenu != '1');
+	
+	
+    cout<<"\nRegresando al menu..."<<endl;
+	Sleep(1000);
+	system("cls");
 }
 
 void buscarProductos() {
@@ -283,7 +308,7 @@ void login() {
     string intento;
 
     while (true) {
-        system("cls");  // Limpia la pantalla antes de cada intento
+        system("cls");
 
         cout << "==========================================" << endl;
         cout << "               TOXO TIENDA                " << endl;
@@ -296,13 +321,13 @@ void login() {
 
         if (intento == contrasenaReal) {
             cout << "\n Acceso concedido. Bienvenido al sistema." << endl;
-            Sleep(1500); 
+            Sleep(1000); 
             system("cls");
             return;
         } else {
             cout << "\n Contraseña incorrecta." << endl;
             cout << " Inténtelo nuevamente..." << endl;
-            Sleep(1500);
+            Sleep(1000);
         }
     }
 }
