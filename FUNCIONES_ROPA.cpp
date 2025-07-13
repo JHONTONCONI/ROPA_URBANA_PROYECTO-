@@ -193,6 +193,7 @@ void mostrarProductos() {
 void buscarProductos() {
 	//char Retorno;
 	string nombreBuscar;
+	system("cls");
     cout << "\n=== BUSCAR PRODUCTO ===" << endl;
     cout << "Ingrese el nombre del producto a buscar: ";
     cin.ignore();
@@ -234,6 +235,7 @@ void buscarProductos() {
 //Funcion para actualizar los productos 
 void actualizarProducto() {
 	string nombreBuscar;
+	system("cls");
     cout << "\n=== ACTUALIZAR PRODUCTO ===" << endl;
     cout << "Ingrese el nombre del producto a actualizar: ";
     cin.ignore();
@@ -287,6 +289,8 @@ void actualizarProducto() {
 void eliminarProducto() {
 	
     string Nombre;
+    system("cls");
+    cout << "\n=== ELIMINAR PRODUCTO ===" << endl;
     cout << "Ingrese el nombre del producto a eliminar: ";
     cin.ignore();
     getline(cin, Nombre);
