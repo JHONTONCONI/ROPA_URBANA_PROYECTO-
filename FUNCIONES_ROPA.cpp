@@ -75,10 +75,17 @@ void agregarProducto() {
             cout << "Limite de productos alcanzado." << endl;
             break;
         }
-        cout << "\n¿Desea agregar otro producto? (S/N): ";
-        cin >> seguir;
-        cin.ignore(1000, '\n'); // Limpiar el buffer
-        seguir = toupper(seguir);
+        do {
+    	cout << "\n¿Desea agregar otro producto? (S/N): ";
+    	cin >> seguir;
+    	cin.ignore(1000, '\n'); // Limpiar el buffer
+    	seguir = toupper(seguir);
+
+    	if (seguir != 'S' && seguir != 'N') {
+        	cout << "Opción inválida. Por favor ingrese solo 'S' o 'N'." << endl;
+    		}
+		} while (seguir != 'S' && seguir != 'N');
+
 
     } while (seguir == 'S');
 
