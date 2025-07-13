@@ -297,7 +297,7 @@ void actualizarProducto() {
 	
 	string Retorno;
     cout<<"\nRegresar al menu principal.......[1]"<<endl;
-    cin.ignore();
+    //cin.ignore();
     do{
     	getline(cin, Retorno);
     	if(Retorno != "1"){
