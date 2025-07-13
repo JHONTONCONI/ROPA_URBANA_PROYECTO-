@@ -19,7 +19,14 @@ int totalVentas = 0;
 
 //Funcion para agregaar productos
 void agregarProducto() {
+	system("cls");
     char seguir;
+    cout << "=========================================\n";
+    cout << " SE AGREGARÁN PRODUCTOS AL INVENTARIO\n";
+    cout << " Se requieren los siguientes datos:\n";
+    cout << " - Nombre\n - Precio\n - Stock\n";
+    cout << "=========================================\n\n";
+
     do {
         if (totalProductos < 100) {
             cin.ignore();
