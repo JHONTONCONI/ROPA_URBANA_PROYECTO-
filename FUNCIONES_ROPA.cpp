@@ -425,20 +425,28 @@ void realizarUnaVenta() {
 
 //Funcion para mostrar las ventas 
 void mostrarVentasRealizadas() {
-	cout<<"\n=== VENTAS REALIZADAS ==="<<endl;
-	if (totalVentas == 0){
-		cout<<"Todavia no se a realizado ventas"<<endl;
-		system("pause");
-		return;
-	}
-	for (int i=0;i<totalVentas; i++){
-		cout << "\nVenta #" << i + 1 << ":" << endl;
-        cout << "Producto: " << ventas[i].producto << endl;
-        cout << "Cantidad: " << ventas[i].cantidad << endl;
-        cout << "Total: S/ " << ventas[i].total << endl;
-	}
-	
+    cout << "\n============================================" << endl;
+    cout << "               VENTAS REALIZADAS            " << endl;
+    cout << "============================================" << endl;
+
+    if (totalVentas == 0){
+        cout << "\nTodavía no se ha realizado ninguna venta." << endl;
+        cout << "============================================" << endl;
+        system("pause");
+        return;
+    }
+
+    for (int i = 0; i < totalVentas; i++) {
+        cout << "\nVenta #" << i + 1 << endl;
+        cout << "Producto : " << ventas[i].producto << endl;
+        cout << "Cantidad : " << ventas[i].cantidad << endl;
+        cout << "Total    : S/ " << ventas[i].total << endl;
+        cout << "--------------------------------------------" << endl;
+    }
+
+    system("pause");
 }
+
 
 //Funcion para calcular el total de ventas 
 void calcularTotalDeVentas() {
