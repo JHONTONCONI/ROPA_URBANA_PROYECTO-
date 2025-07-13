@@ -100,15 +100,16 @@ void mostrarProductos() {
    			cout << "3. Por stock (menor a mayor)" << endl;
     		cout << "Ingrese una opción (1-3): ";
     		cin >> opcionChar;
-
-   			if (opcionChar == '1' || opcionChar == '2' || opcionChar == '3') {
-        		opcion = opcionChar - '0';  // convertir char a int
-        		break;
-    		} else {
-        		cout << "\n---------------------------------------------------" << endl;
-        		cout << "Opción inválida, vuelva a digitar un número (1-3)" << endl;
-        		cout << "---------------------------------------------------" << endl;
-    		}
+			
+			if(opcion == '1' || opcionChar == '2' || opcionChar == '3'){
+				opcion = opcionChar - '0';
+				break;
+			}else{
+				cout << "\n---------------------------------------------------" << endl;
+				cout << "Opción inválida, vuelva a digitar un número (1-3)" << endl;
+				cout << "---------------------------------------------------" << endl;
+			}
+   			
 		} while (true);
 
         for (int i = 0; i < totalProductos - 1; i++) {
@@ -150,23 +151,27 @@ void mostrarProductos() {
         cout << "Stock: " << productos[i].stock << endl;
         cout << "------------------------------------------\n";
     }
+    
+    string Retorno;
     cout<<"\nRegresar al menu principal.......[1]"<<endl;
     cin.ignore();
     do{
-    	cin>>RetornoMenu;
-    	if(RetornoMenu != '1'){
-    		cout<<"Opcion invalida. Para regresar al MENU digite [1]"<<endl;
+    	getline(cin, Retorno);
+    	if(Retorno != "1"){
+    		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
     	}
-    }while(RetornoMenu != '1');
-	
+    }while(Retorno != "1");
+    
 	
     cout<<"\nRegresando al menu..."<<endl;
 	Sleep(1000);
 	system("cls");
+	
 }
 
 //Funcion para buscar los productos 
 void buscarProductos() {
+	//char Retorno;
 	string nombreBuscar;
     cout << "\n=== BUSCAR PRODUCTO ===" << endl;
     cout << "Ingrese el nombre del producto a buscar: ";
@@ -188,7 +193,21 @@ void buscarProductos() {
         cout << "¡Error! Producto no encontrado." << endl;
         cout << "-----------------------------------" << endl;
     }
-    system("pause");
+    
+    string Retorno;
+    cout<<"\nRegresar al menu principal.......[1]"<<endl;
+    cin.ignore();
+    do{
+    	getline(cin, Retorno);
+    	if(Retorno != "1"){
+    		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
+    	}
+    }while(Retorno != "1");
+    
+	
+    cout<<"\nRegresando al menu..."<<endl;
+	Sleep(1000);
+	system("cls");
 }
 
 //Funcion para actualizar los productos 
