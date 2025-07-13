@@ -101,7 +101,7 @@ void mostrarProductos() {
     		cout << "Ingrese una opción (1-3): ";
     		cin >> opcionChar;
 			
-			if(opcion == '1' || opcionChar == '2' || opcionChar == '3'){
+			if(opcionChar == '1' || opcionChar == '2' || opcionChar == '3'){
 				opcion = opcionChar - '0';
 				break;
 			}else{
@@ -196,8 +196,9 @@ void buscarProductos() {
     
     string Retorno;
     cout<<"\nRegresar al menu principal.......[1]"<<endl;
-    cin.ignore();
+    
     do{
+    	cout<<"> ";
     	getline(cin, Retorno);
     	if(Retorno != "1"){
     		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
@@ -278,7 +279,9 @@ void eliminarProducto() {
             cin >> confirmar;
             if (toupper(confirmar) != 'S') {
                 cout << "Eliminación cancelada." << endl;
-                system("pause");
+                cout<<"Regregando al MENU principal....";
+                Sleep(1800);
+                system("cls");
                 return;
             }
 
@@ -287,14 +290,43 @@ void eliminarProducto() {
             }
             totalProductos--;
             cout << "Producto eliminado." << endl;
-            system("pause");
+            
+            string Retorno;
+            cout<<"\nRegresar al menu principal.......[1]"<<endl;
+            cin.ignore();
+            do{
+            	getline(cin, Retorno);
+    			if(Retorno != "1"){
+    				cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
+    			}
+            }while(Retorno != "1");
+            
+            cout<<"\nRegresando al menu..."<<endl;
+			Sleep(1000);
+			system("cls");
+            
             return;
         }
     }
     cout << "\n-----------------------------------" << endl;
     cout << "¡Error! Producto no encontrado." << endl;
     cout << "-----------------------------------" << endl;
-    system("pause");
+    
+    string Retorno;
+    cout<<"\nRegresar al menu principal.......[1]"<<endl;
+    
+    do{
+    	cout<<"> ";
+    	getline(cin, Retorno);
+    	if(Retorno != "1"){
+    		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
+    	}
+    }while(Retorno != "1");
+    
+	
+    cout<<"\nRegresando al menu..."<<endl;
+	Sleep(1000);
+	system("cls");
 }
 
 //Funcion para realizar una venta
