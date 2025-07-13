@@ -283,11 +283,11 @@ void eliminarProducto() {
 
 //Funcion para realizar una venta
 void realizarUnaVenta() {
-	cin.ignore();  // Limpiar buffer
+    cin.ignore();  // Limpiar buffer
     string nombreBuscado;
     int cantidad;
-    
-	if (totalProductos == 0) {
+
+    if (totalProductos == 0) {
         cout << "No hay productos registrados." << endl;
         system("pause");
         return;
@@ -321,8 +321,27 @@ void realizarUnaVenta() {
                 ventas[totalVentas].cantidad = cantidad;
                 ventas[totalVentas].total = total;
                 totalVentas++;
-                cout << "Venta realizada con éxito." << endl;
+
+                cout << "\nVenta realizada con éxito." << endl;
                 cout << "Total a pagar: S/ " << total << endl;
+
+                // BOLETA VISUAL
+                cout << "\n------------------------------------------\n";
+                cout << "              *** BOLETA ***              \n";
+                cout << "------------------------------------------\n";
+                cout << "Tienda: TOXO URBANO" << endl;
+                cout << "Dirección: Av. Comercial #123, Tacna - Perú" << endl;
+                cout << "RUC: 12345678901" << endl;
+                cout << "------------------------------------------\n";
+                cout << "Producto: " << productos[i].nombre << endl;
+                cout << "Cantidad: " << cantidad << endl;
+                cout << "Precio unitario: S/ " << productos[i].precio << endl;
+                cout << "Total a pagar:    S/ " << total << endl;
+                cout << "------------------------------------------\n";
+                cout << "¡Gracias por comprar en nuestra tienda!" << endl;
+                cout << "Valoramos mucho tu preferencia." << endl;
+                cout << "------------------------------------------\n\n";
+                system("pause");
             } else {
                 cout << "Stock insuficiente." << endl;
                 system("pause");
