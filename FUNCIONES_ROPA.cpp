@@ -184,7 +184,9 @@ void buscarProductos() {
         }
     }
     if (encontrado == false) {
-        cout << "Producto no encontrado." << endl;
+        cout << "\n-----------------------------------" << endl;
+        cout << "¡Error! Producto no encontrado." << endl;
+        cout << "-----------------------------------" << endl;
     }
     system("pause");
 }
@@ -218,7 +220,9 @@ void actualizarProducto() {
 	    }
 	}
 	if (buscado == false) {
-    cout << "Producto no encontrado." << endl;
+    cout << "\n-----------------------------------" << endl;
+    cout << "¡Error! Producto no encontrado." << endl;
+    cout << "-----------------------------------" << endl;
 	}
 	system("pause");
 }
@@ -242,7 +246,9 @@ void eliminarProducto() {
             return;
         }
     }
-    cout<< "Producto no encontrado."<<endl;
+    cout << "\n-----------------------------------" << endl;
+    cout << "¡Error! Producto no encontrado." << endl;
+    cout << "-----------------------------------" << endl;
     system("pause");
 }
 
@@ -298,7 +304,9 @@ void realizarUnaVenta() {
     }
 
     if (!encontrado) {
-        cout << "Producto no encontrado." << endl;
+        cout << "\n-----------------------------------" << endl;
+        cout << "¡Error! Producto no encontrado." << endl;
+        cout << "-----------------------------------" << endl;
         system("pause");
     }
 }
