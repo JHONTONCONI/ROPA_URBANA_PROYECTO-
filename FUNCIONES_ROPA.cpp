@@ -408,8 +408,26 @@ void realizarUnaVenta() {
         if (productos[i].nombre == nombreBuscado) {
             encontrado = true;
             cout << "Stock disponible: " << productos[i].stock << endl;
-            cout << "Ingrese cantidad a vender: ";
-            cin >> cantidad;
+            
+            float cantidadTemp;
+            do {
+                cout << "Ingrese cantidad a vender: ";
+                if (!(cin >> cantidadTemp)) {
+                    cout << "Entrada inválida. Debe ingresar un número entero positivo. Intente de nuevo.\n";
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    continue;
+                }
+
+                if (cantidadTemp <= 0 || fmod(cantidadTemp, 1) != 0) {
+                    cout << "La cantidad debe ser un número entero positivo. Intente de nuevo.\n";
+                    continue;
+                }
+
+                cantidad = cantidadTemp;
+                break;
+
+            } while (true);
 
             if (cantidad <= productos[i].stock) {
                 productos[i].stock -= cantidad;
