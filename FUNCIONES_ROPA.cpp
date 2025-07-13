@@ -151,23 +151,27 @@ void mostrarProductos() {
         cout << "Stock: " << productos[i].stock << endl;
         cout << "------------------------------------------\n";
     }
+    
+    string Retorno;
     cout<<"\nRegresar al menu principal.......[1]"<<endl;
     cin.ignore();
     do{
-    	cin>>RetornoMenu;
-    	if(RetornoMenu != '1'){
-    		cout<<"Opcion invalida. Para regresar al MENU digite [1]"<<endl;
+    	getline(cin, Retorno);
+    	if(Retorno != "1"){
+    		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
     	}
-    }while(RetornoMenu != '1');
-	
+    }while(Retorno != "1");
+    
 	
     cout<<"\nRegresando al menu..."<<endl;
 	Sleep(1000);
 	system("cls");
+	
 }
 
 //Funcion para buscar los productos 
 void buscarProductos() {
+	//char Retorno;
 	string nombreBuscar;
     cout << "\n=== BUSCAR PRODUCTO ===" << endl;
     cout << "Ingrese el nombre del producto a buscar: ";
@@ -189,7 +193,21 @@ void buscarProductos() {
         cout << "¡Error! Producto no encontrado." << endl;
         cout << "-----------------------------------" << endl;
     }
-    system("pause");
+    
+    string Retorno;
+    cout<<"\nRegresar al menu principal.......[1]"<<endl;
+    cin.ignore();
+    do{
+    	getline(cin, Retorno);
+    	if(Retorno != "1"){
+    		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
+    	}
+    }while(Retorno != "1");
+    
+	
+    cout<<"\nRegresando al menu..."<<endl;
+	Sleep(1000);
+	system("cls");
 }
 
 //Funcion para actualizar los productos 
