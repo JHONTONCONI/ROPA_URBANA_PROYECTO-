@@ -12,10 +12,12 @@ Producto productos[100] = {
 };
 int totalProductos = 5; 
 
+//Variables globales
 Venta ventas[100] = {};
 int totalVentas = 0;
 	
 
+//Funcion para agregaar productos
 void agregarProducto() {
     char seguir;
     do {
@@ -68,7 +70,7 @@ void agregarProducto() {
     system("cls");
 }
 
-
+//Funcion para comparar el texto ingresado
 string aMinuscula(string texto) {
     for (int i = 0; i < texto.length(); i++) {
         texto[i] = tolower(texto[i]);
@@ -76,6 +78,7 @@ string aMinuscula(string texto) {
     return texto;
 }
 
+//Funcion para mostrar los productos 
 void mostrarProductos() {
 	char RetornoMenu;
 	if (totalProductos == 0) {
@@ -162,6 +165,7 @@ void mostrarProductos() {
 	system("cls");
 }
 
+//Funcion para buscar los productos 
 void buscarProductos() {
 	string nombreBuscar;
     cout << "\n=== BUSCAR PRODUCTO ===" << endl;
@@ -185,6 +189,7 @@ void buscarProductos() {
     system("pause");
 }
 
+//Funcion para actualizar los productos 
 void actualizarProducto() {
 	string nombreBuscar;
     cout << "\n=== ACTUALIZAR PRODUCTO ===" << endl;
@@ -218,6 +223,7 @@ void actualizarProducto() {
 	system("pause");
 }
 
+//Funcion para eliminar un productos
 void eliminarProducto() {
 	
 	string Nombre;
@@ -240,6 +246,7 @@ void eliminarProducto() {
     system("pause");
 }
 
+//Funcion para realizar una venta
 void realizarUnaVenta() {
 	cin.ignore();  // Limpiar buffer
     string nombreBuscado;
@@ -296,6 +303,7 @@ void realizarUnaVenta() {
     }
 }
 
+//Funcion para mostrar las ventas 
 void mostrarVentasRealizadas() {
 	cout<<"\n=== VENTAS REALIZADAS ==="<<endl;
 	if (totalVentas == 0){
@@ -312,6 +320,7 @@ void mostrarVentasRealizadas() {
 	
 }
 
+//Funcion para calcular el total de ventas 
 void calcularTotalDeVentas() {
 	cout << "\n=== TOTAL DE VENTAS ===" << endl;
     if (totalVentas == 0) {
@@ -329,7 +338,7 @@ void calcularTotalDeVentas() {
     system("pause");
 }
 
-
+//funcion para iniciar sesion
 void login() {
     string contrasenaReal = "toxo123";
     string intento;
