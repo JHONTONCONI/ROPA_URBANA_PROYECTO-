@@ -230,18 +230,28 @@ void actualizarProducto() {
 //Funcion para eliminar un productos
 void eliminarProducto() {
 	
-	string Nombre;
-    cout<< "Ingrese el nombre del producto a eliminar: ";
+    string Nombre;
+    cout << "Ingrese el nombre del producto a eliminar: ";
     cin.ignore();
     getline(cin, Nombre);
 
     for (int i = 0; i < totalProductos; i++) {
         if (productos[i].nombre == Nombre) {
+            //Confirmar eliminar producto
+            char confirmar;
+            cout << "¿Está seguro de eliminar el producto '" << Nombre << "'? (S/N): ";
+            cin >> confirmar;
+            if (toupper(confirmar) != 'S') {
+                cout << "Eliminación cancelada." << endl;
+                system("pause");
+                return;
+            }
+
             for (int j = i; j < totalProductos - 1; j++) {
                 productos[j] = productos[j + 1];
             }
             totalProductos--;
-            cout << "Producto eliminado."<<endl;
+            cout << "Producto eliminado." << endl;
             system("pause");
             return;
         }
