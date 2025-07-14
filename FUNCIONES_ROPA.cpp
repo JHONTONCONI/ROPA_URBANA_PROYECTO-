@@ -83,13 +83,13 @@ void agregarProducto() {
             break;
         }
         do {
-    	cout << "\n¿Desea agregar otro producto? (S/N): ";
-    	cin >> seguir;
-    	cin.ignore(1000, '\n'); // Limpiar el buffer
-    	seguir = toupper(seguir);
+    		cout << "\n¿Desea agregar otro producto? (S/N): ";
+    		cin.ignore(1000, '\n');
+			cin >> seguir; 
+    		seguir = toupper(seguir);
 
-    	if (seguir != 'S' && seguir != 'N') {
-        	cout << "Opción inválida. Por favor ingrese solo 'S' o 'N'." << endl;
+    		if (seguir != 'S' && seguir != 'N') {
+        		cout << "Opción inválida. Por favor ingrese solo 'S' o 'N'." << endl;
     		}
 		} while (seguir != 'S' && seguir != 'N');
 
@@ -284,6 +284,7 @@ void actualizarProducto() {
             cin >> productos[i].precio;
             cout << "Nuevo stock: ";
             cin >> productos[i].stock;
+            cin.ignore();
             cout << "Producto actualizado exitosamente!" << endl;
        		buscado = true;
        		break;
@@ -297,7 +298,7 @@ void actualizarProducto() {
 	
 	string Retorno;
     cout<<"\nRegresar al menu principal.......[1]"<<endl;
-    cin.ignore();
+    //cin.ignore();
     do{
     	getline(cin, Retorno);
     	if(Retorno != "1"){
@@ -435,6 +436,8 @@ void realizarUnaVenta() {
                 break;
 
             } while (true);
+            
+            cin.ignore();
 
             if (cantidad <= productos[i].stock) {
                 productos[i].stock -= cantidad;
@@ -465,6 +468,7 @@ void realizarUnaVenta() {
                 cout << "------------------------------------------\n\n";
             } else {
                 cout << "Stock insuficiente." << endl;
+                cin.ignore();
             }
 
            	string Retorno;
@@ -480,22 +484,27 @@ void realizarUnaVenta() {
 			    cout<<"\nRegresando al menu..."<<endl;
 				Sleep(1000);
 				system("cls");
+				return;
 			}
         }
+        
     if (!encontrado) {
     	system("cls");
         cout << "\n-----------------------------------" << endl;
         cout << "¡Error! Producto no encontrado." << endl;
         cout << "-----------------------------------" << endl;
-        string Retorno;
+        
+		string Retorno;
 		cout<<"\nRegresar al menu principal.......[1]"<<endl;	    
-	    do{
+	    
+		do{
 			cout<<">";
 			getline(cin, Retorno);
 			if(Retorno != "1"){
 			   	cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
 			}
 		}while(Retorno != "1");
+		
 		cout<<"\nRegresando al menu..."<<endl;
 		Sleep(1000);
 		system("cls");
@@ -560,6 +569,9 @@ void calcularTotalDeVentas() {
         cout << "\nNo se ha realizado ninguna venta." << endl;
         cout << "============================================" << endl;
         system("pause");
+        cout<<"Regresando al menu...";
+		Sleep(1800);
+		system("cls");
         return;
     }
 
@@ -570,7 +582,9 @@ void calcularTotalDeVentas() {
 
     cout << "\nEl total acumulado de todas las ventas es: S/ " << sumaTotal << endl;
     cout << "============================================" << endl;
-    system("pause");
+    cout<<"saliendo al menu...";
+    Sleep(1800);
+	system("cls");
 }
 
 //funcion para iniciar sesion
