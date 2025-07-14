@@ -470,7 +470,7 @@ void realizarUnaVenta() {
                 cout << "Precio unitario: S/ " << productos[i].precio << endl;
                 cout << "Total a pagar:    S/ " << total << endl;
                 cout << "------------------------------------------\n";
-                cout << "¡Gracias por comprar en nuestra tienda!" << endl;
+                cout << "¡Gracias por vender en nuestra tienda!" << endl;
                 cout << "Valoramos mucho tu preferencia." << endl;
                 cout << "------------------------------------------\n\n";
             } else {
