@@ -5,13 +5,20 @@ using namespace std;
 
 
 Producto productos[100] = {
-    {"Polera Oversize", 89.90, 10},
+    {"Polo Street", 59.90, 12},
     {"Jogger Urbano", 79.50, 15},
-    {"Gorra Negra", 39.90, 20},
+    {"Chompa Hoodie", 149.90, 7},
     {"Casaca Denim", 129.99, 8},
-    {"Zapatillas Retro", 199.00, 5}
+    {"Short Deportivo", 49.90, 18},
+    {"Mochila Urbana", 109.90, 6},
+    {"Zapatillas Chunky", 219.00, 4},
+    {"Chaleco Street", 119.90, 6},
+    {"Cargo Pants", 139.90, 9},
+    {"Zapatillas Skate", 199.90, 5},
+    {"Gorra Trucker", 39.90, 15}
+    
 };
-int totalProductos = 5; 
+int totalProductos = 11; 
 
 //Variables globales
 Venta ventas[100] = {};
@@ -582,6 +589,7 @@ void calcularTotalDeVentas() {
 
     cout << "\nEl total acumulado de todas las ventas es: S/ " << sumaTotal << endl;
     cout << "============================================" << endl;
+    system("pause");
     cout<<"saliendo al menu...";
     Sleep(1800);
 	system("cls");
