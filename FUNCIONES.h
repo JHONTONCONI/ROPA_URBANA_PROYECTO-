@@ -30,5 +30,4 @@ void mostrarVentasRealizadas();
 void calcularTotalDeVentas();
 void login();
 
-
 #endif

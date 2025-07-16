@@ -345,6 +345,14 @@ void eliminarProducto() {
 	
     string Nombre;
     system("cls");
+    cout << "\n========== PRODUCTOS ACTUALES ==========\n";
+    for (int i = 0; i < totalProductos; i++) {
+        cout << "Producto " << i + 1 << ":\n";
+        cout << "Nombre: " << productos[i].nombre << endl;
+        cout << "Precio: S/ " << productos[i].precio << endl;
+        cout << "Stock: " << productos[i].stock << endl;
+        cout << "------------------------------------------\n";
+    }
     cout << "\n=== ELIMINAR PRODUCTO ===" << endl;
     cout << "Ingrese el nombre del producto a eliminar: ";
     cin.ignore();
