@@ -18,7 +18,8 @@ struct Venta {
 	float total;
 };
 
-
+void mostrarMenuVendedor();
+void mostrarMenuCliente();
 void agregarProducto();
 void mostrarProductos();
 void buscarProductos();
