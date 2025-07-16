@@ -1,7 +1,77 @@
 #include <iostream>
 #include "funciones.h"
+#include "validaciones.h"
 #include <cmath>
 using namespace std;
+
+
+void mostrarMenuVendedor() {
+	login();
+    char opcion;
+
+    do {
+        system("cls");
+        cout << "**************************************************\n";
+        cout << "*        PANEL DE VENDEDOR - TOXSTYLE            *\n";
+        cout << "**************************************************\n\n";
+
+        cout << "***Seleccione una opción***\n";
+        cout << "A. Agregar producto.\n";
+        cout << "B. Mostrar productos.\n";
+        cout << "C. Buscar productos.\n";
+        cout << "D. Actualizar producto.\n";
+        cout << "E. Eliminar producto.\n";
+        cout << "F. Realizar una venta.\n";
+        cout << "G. Mostrar ventas realizadas.\n";
+        cout << "H. Calcular total de ventas.\n";
+        cout << "I. Salir del programa.\n";
+        cout << "Opción: ";
+        cin >> opcion;
+        opcion = toupper(opcion);
+
+        switch (opcion) {
+            case 'A': agregarProducto(); break;
+            case 'B': mostrarProductos(); break;
+            case 'C': buscarProductos(); break;
+            case 'D': actualizarProducto(); break;
+            case 'E': eliminarProducto(); break;
+            case 'F': realizarUnaVenta(); break;
+            case 'G': mostrarVentasRealizadas(); break;
+            case 'H': calcularTotalDeVentas(); break;
+            case 'I': cout << "Saliendo...\n"; break;
+            default: cout << "Opción no válida.\n"; Sleep(1000);
+        }
+
+    } while (opcion != 'I');
+}
+
+
+void mostrarMenuCliente() {
+    char opcion;
+
+    do {
+        system("cls");
+        cout << "**************************************************\n";
+        cout << "*         PANEL DE CLIENTE - TOXSTYLE            *\n";
+        cout << "**************************************************\n\n";
+
+        cout << "***Seleccione una opción***\n";
+        cout << "A. Ver productos disponibles.\n";
+        cout << "B. Realizar compra.\n";
+        cout << "C. Salir.\n";
+        cout << "Opción: ";
+        cin >> opcion;
+        opcion = toupper(opcion);
+
+        switch (opcion) {
+            case 'A': mostrarProductos(); break;
+            case 'B': realizarUnaVenta(); break;
+            case 'C': cout << "Saliendo...\n"; break;
+            default: cout << "Opción no válida.\n"; Sleep(1000);
+        }
+
+    } while (opcion != 'C');
+}
 
 
 Producto productos[100] = {
@@ -39,48 +109,9 @@ void agregarProducto() {
         if (totalProductos < 100) {
             cin.ignore();
             
-            do {
-                cout << "Nombre del producto: ";
-                getline(cin, productos[totalProductos].nombre);
-                if (productos[totalProductos].nombre == "") {
-                    cout << "El nombre no puede estar vacío. Intente de nuevo.\n";
-                }
-            } while (productos[totalProductos].nombre == "");
-            
-            do {
-                cout << "Precio: ";
-                if (!(cin >> productos[totalProductos].precio)) {
-                    cout << "Entrada inválida. Debe ingresar un número. Intente de nuevo.\n";
-                    cin.clear();
-                    // Limpiar el buffer de entrada (usamos 1000 como número grande arbitrario)
-                    cin.ignore(1000, '\n');
-                    productos[totalProductos].precio = -1; // Forzar iteración
-                    continue;
-                }
-                if (productos[totalProductos].precio <= 0) {
-                    cout << "El precio debe ser mayor que 0. Intente de nuevo.\n";
-                }
-            } while (productos[totalProductos].precio <= 0);
-
-            float stockTemp;
-            do {
-                cout << "Stock: ";
-                if (!(cin >> stockTemp)) {
-                    cout << "Entrada inválida. Debe ingresar un número entero. Intente de nuevo.\n";
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    continue;
-                }
-
-                if (stockTemp < 0 || fmod(stockTemp, 1) != 0) {
-                    cout << "El stock debe ser un número entero no negativo. Intente de nuevo.\n";
-                    continue;
-                }
-
-                productos[totalProductos].stock = stockTemp;
-                break;
-
-            } while (true);
+            productos[totalProductos].nombre = leerNombre("Nombre del producto: ");
+            productos[totalProductos].precio = leerPrecio("Precio: ");
+            productos[totalProductos].stock = leerStock("Stock: ");
 
             totalProductos++;
             cout << "EL producto fue agregado exitosamente." << endl;
@@ -89,24 +120,14 @@ void agregarProducto() {
             cout << "Limite de productos alcanzado." << endl;
             break;
         }
-        do {
-    		cout << "\n¿Desea agregar otro producto? (S/N): ";
-    		cin.ignore(1000, '\n');
-			cin >> seguir; 
-    		seguir = toupper(seguir);
-
-    		if (seguir != 'S' && seguir != 'N') {
-        		cout << "Opción inválida. Por favor ingrese solo 'S' o 'N'." << endl;
-    		}
-		} while (seguir != 'S' && seguir != 'N');
-
-
+       seguir = leerSN("\n¿Desea agregar otro producto? (S/N): ");
     } while (seguir == 'S');
 
     cout << "\nRegresando al menu..." << endl;
     Sleep(1000);
     system("cls");
 }
+
 
 //Funcion para comparar el texto ingresado
 string aMinuscula(string texto) {

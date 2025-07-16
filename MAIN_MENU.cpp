@@ -2,16 +2,20 @@
 #include<string>
 #include <windows.h> 
 #include "funciones.h"
+#include "validaciones.h"
 using namespace std;
 
 
 int main() {
 	SetConsoleOutputCP(1252);
-	login();
+	
     char opcion;
+    char tipoUsuario;
 
     do {
+    	system("cls");
         cout << endl;
+        
         cout << "**************************************************\n";
     	cout << "*                                                *\n";
     	cout << "*        BIENVENIDO A LA TIENDA URBANA           *\n";
@@ -20,33 +24,27 @@ int main() {
     	cout << "*                                                *\n";
     	cout << "**************************************************\n\n";
         cout << endl;
-        cout << "***Seleccione una opcion***" << endl;
-        cout << "A. Agregar producto." << endl;
-        cout << "B. Mostrar productos." << endl;
-        cout << "C. Buscar productos." << endl;
-        cout << "D. Actualizar producto." << endl;
-        cout << "E. Eliminar producto" << endl;
-		cout << "F. Realizar una venta" << endl;
-		cout << "G. Mostrar ventas realizadas" << endl;
-		cout << "H. Calcular total de ventas" << endl;
-		cout << "I. Salir del programa." << endl;
-        cin >> opcion;
-        opcion = toupper(opcion);
+        cout << "***¿Qué tipo de usuario eres?***\n" << endl;
+        cout << "V. Vendedor\n";
+        cout << "C. Cliente\n";
+        cout << "Seleccione una opción: ";
+        
+        cin >> tipoUsuario;
+        cin.ignore();
+        tipoUsuario = toupper(tipoUsuario);
 
-        switch (opcion) {
-            case 'A': agregarProducto(); break;
-            case 'B': mostrarProductos(); break; 
-            case 'C': buscarProductos(); break;
-            case 'D': actualizarProducto(); break;
-			case 'E': eliminarProducto(); break;
-			case 'F': realizarUnaVenta(); break;
-			case 'G': mostrarVentasRealizadas(); break;
-			case 'H': calcularTotalDeVentas(); break;
-            case 'I': cout << "Saliendo del programa..." << endl; break;
-            default: cout << "Opcion no valida." << endl;
+        if (tipoUsuario != 'V' && tipoUsuario != 'C') {
+            cout << "\nOpción inválida. Intente nuevamente.\n";
+            Sleep(1500);
         }
+    } while (tipoUsuario != 'V' && tipoUsuario != 'C');
 
-    } while (opcion != 'I');
+    // Mostrar menú según el tipo de usuario
+    if (tipoUsuario == 'V') {
+        mostrarMenuVendedor();
+    } else {
+        mostrarMenuCliente();
+    }
 
     return 0;
 }
