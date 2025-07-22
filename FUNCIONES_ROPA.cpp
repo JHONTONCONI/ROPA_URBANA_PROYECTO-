@@ -58,7 +58,7 @@ void mostrarMenuCliente() {
         cout << "***Seleccione una opción***\n";
         cout << "A. Ver productos disponibles.\n";
         cout << "B. Realizar compra.\n";
-        cout << "C. Salir.\n";
+        cout << "C. Regresar al menu principal.\n"; 
         cout << "Opción: ";
         cin >> opcion;
         opcion = toupper(opcion);
@@ -66,11 +66,15 @@ void mostrarMenuCliente() {
         switch (opcion) {
             case 'A': mostrarProductos(); break;
             case 'B': realizarUnaCompra(); break;
-            case 'C': cout << "Saliendo...\n"; break;
+            case 'C': {
+                cout << "Regresando al menú principal...\n";
+                Sleep(1000);
+                return; 
+            }
             default: cout << "Opción no válida.\n"; Sleep(1000);
         }
 
-    } while (opcion != 'C');
+    } while (true); 
 }
 
 
