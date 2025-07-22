@@ -7,6 +7,7 @@
 using namespace std;
 
 struct Producto {
+	int codigo; //mod
     string nombre;
     float precio;
     int stock;

@@ -78,19 +78,19 @@ void mostrarMenuCliente() {
 
 
 Producto productos[100] = {
-    {"Polo Street", 59.90, 12},
-    {"Jogger Urbano", 79.50, 15},
-    {"Chompa Hoodie", 149.90, 7},
-    {"Casaca Denim", 129.99, 8},
-    {"Short Deportivo", 49.90, 18},
-    {"Mochila Urbana", 109.90, 6},
-    {"Zapatillas Chunky", 219.00, 4},
-    {"Chaleco Street", 119.90, 6},
-    {"Cargo Pants", 139.90, 9},
-    {"Zapatillas Skate", 199.90, 5},
-    {"Gorra Trucker", 39.90, 15}
-    
+    {100, "Polo Street", 59.90, 12},
+    {101, "Jogger Urbano", 79.50, 15},
+    {102, "Chompa Hoodie", 149.90, 7},
+    {103, "Casaca Denim", 129.99, 8},
+    {104, "Short Deportivo", 49.90, 18},
+    {105, "Mochila Urbana", 109.90, 6},
+    {106, "Zapatillas Chunky", 219.00, 4},
+    {107, "Chaleco Street", 119.90, 6},
+    {108, "Cargo Pants", 139.90, 9},
+    {109, "Zapatillas Skate", 199.90, 5},
+    {110, "Gorra Trucker", 39.90, 15}
 };
+
 int totalProductos = 11; 
 
 //Variables globales
@@ -100,34 +100,56 @@ int totalVentas = 0;
 
 //Funcion de realizar una compra para el panel del usuario
 void realizarUnaCompra() {
-    cin.ignore();  // Limpiar buffer
-    string nombreBuscado;
-    int cantidad;
-
     if (totalProductos == 0) {
         cout << "No hay productos disponibles." << endl;
         system("pause");
         return;
     }
 
+    cin.ignore();  // Limpiar buffer
+    int codigoBuscado;
+    int cantidad;
+
     system("cls");
     cout << "\n========== PRODUCTOS DISPONIBLES ==========\n";
     for (int i = 0; i < totalProductos; i++) {
-        cout << "Producto " << i + 1 << ":\n";
-        cout << "Nombre : " << productos[i].nombre << endl;
-        cout << "Precio : S/ " << productos[i].precio << endl;
-        cout << "Stock  : " << productos[i].stock << endl;
+        cout << "Código  : " << productos[i].codigo << endl;
+        cout << "Nombre  : " << productos[i].nombre << endl;
+        cout << "Precio  : S/ " << productos[i].precio << endl;
+        cout << "Stock   : " << productos[i].stock << endl;
         cout << "------------------------------------------\n";
     }
 
     cout << "\n=== COMPRA DE PRODUCTO ===" << endl;
-    cout << "Ingrese el nombre del producto a comprar: ";
-    getline(cin, nombreBuscado);
-    bool encontrado = false;
+    
+    // Validar código ingresado
+    float codigoTemp;
+	bool codigoValido = false;
+	do {
+    	cout << "Ingrese el código del producto a comprar (100-199): ";
+    	if (!(cin >> codigoTemp)) {
+        	cout << "Entrada inválida. Ingrese un número entero entre 100 y 199.\n";
+        	cin.clear();
+       	 	cin.ignore(1000, '\n');
+       	 	continue;
+   		}
 
+   		 if (codigoTemp < 100 || codigoTemp > 199 || fmod(codigoTemp, 1) != 0) {
+   		     cout << "Código inválido. Debe ser un número entero entre 100 y 199.\n";
+       		 continue;
+    	}
+
+    	codigoBuscado = codigoTemp;
+   		codigoValido = true;
+
+	} while (!codigoValido);
+
+
+    bool encontrado = false;
     for (int i = 0; i < totalProductos; i++) {
-        if (productos[i].nombre == nombreBuscado) {
+        if (productos[i].codigo == codigoBuscado) {
             encontrado = true;
+            cout << "Producto encontrado: " << productos[i].nombre << endl;
             cout << "Stock disponible: " << productos[i].stock << endl;
 
             float cantidadTemp;
@@ -145,40 +167,40 @@ void realizarUnaCompra() {
                 }
 
                 cantidad = cantidadTemp;
-                break;
+                if (cantidad > productos[i].stock) {
+                    cout << "Cantidad mayor al stock disponible. Ingrese un valor válido.\n";
+                    continue;
+                }
 
+                break;
             } while (true);
 
-            cin.ignore();
+            cin.ignore(); // Limpiar salto de línea
 
-            if (cantidad <= productos[i].stock) {
-                productos[i].stock -= cantidad;
-                float total = cantidad * productos[i].precio;
+            productos[i].stock -= cantidad;
+            float total = cantidad * productos[i].precio;
 
-                cout << "\nCompra realizada con éxito." << endl;
-                cout << "Total a pagar: S/ " << total << endl;
+            cout << "\nCompra realizada con éxito." << endl;
+            cout << "Total a pagar: S/ " << total << endl;
 
-                // BOLETA VISUAL
-                cout << "\n------------------------------------------\n";
-                cout << "              *** BOLETA ***              \n";
-                cout << "------------------------------------------\n";
-                cout << "Tienda     : TOXSTYLE" << endl;
-                cout << "Dirección  : Av. Comercial #123, Tacna - Perú" << endl;
-                cout << "------------------------------------------\n";
-                cout << "Producto        : " << productos[i].nombre << endl;
-                cout << "Cantidad        : " << cantidad << endl;
-                cout << "Precio unitario : S/ " << productos[i].precio << endl;
-                cout << "------------------------------------------\n";
-                cout << "TOTAL PAGADO    : S/ " << total << endl;
-                cout << "------------------------------------------\n";
-                cout << "¡Gracias por tu compra!" << endl;
-                cout << "Disfruta tu estilo con TOXSTYLE." << endl;
-                cout << "------------------------------------------\n\n";
-            } else {
-                cout << "Stock insuficiente." << endl;
-                cin.ignore();
-            }
+            // BOLETA VISUAL
+            cout << "\n------------------------------------------\n";
+            cout << "              *** BOLETA ***              \n";
+            cout << "------------------------------------------\n";
+            cout << "Tienda     : TOXSTYLE" << endl;
+            cout << "Dirección  : Av. Comercial #123, Tacna - Perú" << endl;
+            cout << "------------------------------------------\n";
+            cout << "Producto        : " << productos[i].nombre << endl;
+            cout << "Cantidad        : " << cantidad << endl;
+            cout << "Precio unitario : S/ " << productos[i].precio << endl;
+            cout << "------------------------------------------\n";
+            cout << "TOTAL PAGADO    : S/ " << total << endl;
+            cout << "------------------------------------------\n";
+            cout << "¡Gracias por tu compra!" << endl;
+            cout << "Disfruta tu estilo con TOXSTYLE." << endl;
+            cout << "------------------------------------------\n\n";
 
+            // Fin del proceso
             string Retorno;
             cout << "\nRegresar al menú principal.......[1]\n";
             do {
@@ -199,9 +221,9 @@ void realizarUnaCompra() {
     if (!encontrado) {
         system("cls");
         cout << "\n-----------------------------------" << endl;
-        cout << "¡Error! Producto no encontrado." << endl;
+        cout << "¡Error! Código de producto no encontrado." << endl;
         cout << "-----------------------------------" << endl;
-
+		cin.ignore();
         string Retorno;
         cout << "\nRegresar al menú principal.......[1]\n";
         do {
@@ -217,6 +239,7 @@ void realizarUnaCompra() {
         system("cls");
     }
 }
+
 
 
 
