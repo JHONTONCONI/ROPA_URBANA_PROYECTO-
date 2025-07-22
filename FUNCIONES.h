@@ -32,3 +32,32 @@ void calcularTotalDeVentas();
 void login();
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#include <stdlib.h> 
