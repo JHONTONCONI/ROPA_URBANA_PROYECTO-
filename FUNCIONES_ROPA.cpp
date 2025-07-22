@@ -825,6 +825,8 @@ void realizarUnaVenta() {
 
             productos[i].stock -= cantidad;
             float total = cantidad * productos[i].precio;
+            //Registro de venta:
+            ventas[totalVentas].codigo = productos[i].codigo;
             ventas[totalVentas].producto = productos[i].nombre;
             ventas[totalVentas].cantidad = cantidad;
             ventas[totalVentas].total = total;
@@ -895,50 +897,57 @@ void realizarUnaVenta() {
 
 //Funcion para mostrar las ventas 
 void mostrarVentasRealizadas() {
-	cin.ignore();
-	system("cls");
+    cin.ignore();
+    system("cls");
+
     cout << "\n============================================" << endl;
     cout << "               VENTAS REALIZADAS            " << endl;
     cout << "============================================" << endl;
 
-    if (totalVentas == 0){
+    if (totalVentas == 0) {
         cout << "\nTodavía no se ha realizado ninguna venta." << endl;
         cout << "============================================" << endl;
+
         string Retorno;
-		cout<<"\nRegresar al menu principal.......[1]"<<endl;	    
-	    do{
-			cout<<">";
-			getline(cin, Retorno);
-			if(Retorno != "1"){
-			   	cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
-			}
-		}while(Retorno != "1");
-		cout<<"\nRegresando al menu..."<<endl;
-		Sleep(1000);
-		system("cls");
-		return;
+        cout << "\nRegresar al menú principal.......[1]" << endl;
+        do {
+            cout << "> ";
+            getline(cin, Retorno);
+            if (Retorno != "1") {
+                cout << "Opción inválida. Para regresar al menú digite [1]" << endl;
+            }
+        } while (Retorno != "1");
+
+        cout << "\nRegresando al menú..." << endl;
+        Sleep(1000);
+        system("cls");
+        return;
     }
 
     for (int i = 0; i < totalVentas; i++) {
         cout << "\nVenta #" << i + 1 << endl;
+        cout << "Código   : " << ventas[i].codigo << endl;
         cout << "Producto : " << ventas[i].producto << endl;
         cout << "Cantidad : " << ventas[i].cantidad << endl;
         cout << "Total    : S/ " << ventas[i].total << endl;
         cout << "--------------------------------------------" << endl;
     }
-	string Retorn;
-	cout<<"\nRegresar al menu principal.......[1]"<<endl;	    
-    do{
-		cout<<"> ";
-		getline(cin, Retorn);
-		if(Retorn != "1"){
-		   	cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
-		}
-	}while(Retorn != "1");
-	cout<<"\nRegresando al menu..."<<endl;
-	Sleep(1000);
-	system("cls");
+
+    string Retorn;
+    cout << "\nRegresar al menú principal.......[1]" << endl;
+    do {
+        cout << "> ";
+        getline(cin, Retorn);
+        if (Retorn != "1") {
+            cout << "Opción inválida. Para regresar al menú digite [1]" << endl;
+        }
+    } while (Retorn != "1");
+
+    cout << "\nRegresando al menú..." << endl;
+    Sleep(1000);
+    system("cls");
 }
+
 
 
 //Funcion para calcular el total de ventas 
