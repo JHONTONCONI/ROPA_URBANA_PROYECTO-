@@ -14,6 +14,7 @@ struct Producto {
 };
 
 struct Venta {
+	int codigo;
 	string producto; 
 	int cantidad; 
 	float total;

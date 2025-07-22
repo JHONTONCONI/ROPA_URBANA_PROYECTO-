@@ -253,47 +253,93 @@ void agregarProducto() {
     cout << "=========================================\n";
     cout << " SE AGREGARÁN PRODUCTOS AL INVENTARIO\n";
     cout << " Se requieren los siguientes datos:\n";
-    cout << " - Código (100-199)\n - Nombre\n - Precio\n - Stock\n";
+    cout << " - Código (100 - 199, único)\n - Nombre\n - Precio\n - Stock\n";
     cout << "=========================================\n\n";
 
     do {
         if (totalProductos < 100) {
             cin.ignore();
 
-            // Validar código único entre 100 y 199
+            // Validar código del producto
+            float codigoTemp;
             int codigo;
-            bool valido;
+            bool codigoValido;
             do {
-                cout << "Código del producto (100-199): ";
-                if (!(cin >> codigo)) {
-                    cout << "Entrada inválida. Debe ser un número entero.\n";
+                codigoValido = true;
+                cout << "Código del producto (100 - 199): ";
+                if (!(cin >> codigoTemp)) {
+                    cout << "Entrada inválida. Ingrese un número.\n";
                     cin.clear();
                     cin.ignore(1000, '\n');
-                    valido = false;
-                    continue;
-                }
-                if (codigo < 100 || codigo > 199) {
-                    cout << "El código debe estar entre 100 y 199.\n";
-                    valido = false;
+                    codigoValido = false;
                     continue;
                 }
 
-                // Verificar si el código ya existe
-                valido = true;
+                if (codigoTemp < 100 || codigoTemp > 199 || fmod(codigoTemp, 1) != 0) {
+                    cout << "Código inválido. Debe ser un número entero entre 100 y 199.\n";
+                    codigoValido = false;
+                    continue;
+                }
+
+                codigo = codigoTemp;  
+
+                // Verificar si ya existe
                 for (int i = 0; i < totalProductos; i++) {
                     if (productos[i].codigo == codigo) {
-                        cout << "Ese código ya está en uso. Intente otro.\n";
-                        valido = false;
+                        cout << "Código duplicado. Ya existe un producto con ese código.\n";
+                        codigoValido = false;
                         break;
                     }
                 }
-            } while (!valido);
+
+            } while (!codigoValido);
+
             productos[totalProductos].codigo = codigo;
 
-            cin.ignore(); // Limpiar después de leer el código
-            productos[totalProductos].nombre = leerNombre("Nombre del producto: ");
-            productos[totalProductos].precio = leerPrecio("Precio: ");
-            productos[totalProductos].stock = leerStock("Stock: ");
+            cin.ignore();  
+            do {
+                cout << "Nombre del producto: ";
+                getline(cin, productos[totalProductos].nombre);
+                if (productos[totalProductos].nombre == "") {
+                    cout << "El nombre no puede estar vacío. Intente de nuevo.\n";
+                }
+            } while (productos[totalProductos].nombre == "");
+
+            // Precio
+            do {
+                cout << "Precio: ";
+                if (!(cin >> productos[totalProductos].precio)) {
+                    cout << "Entrada inválida. Debe ingresar un número.\n";
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    productos[totalProductos].precio = -1;
+                    continue;
+                }
+                if (productos[totalProductos].precio <= 0) {
+                    cout << "El precio debe ser mayor que 0. Intente de nuevo.\n";
+                }
+            } while (productos[totalProductos].precio <= 0);
+
+            // Stock
+            float stockTemp;
+            do {
+                cout << "Stock: ";
+                if (!(cin >> stockTemp)) {
+                    cout << "Entrada inválida. Debe ingresar un número entero.\n";
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    continue;
+                }
+
+                if (stockTemp < 0 || fmod(stockTemp, 1) != 0) {
+                    cout << "El stock debe ser un número entero no negativo. Intente de nuevo.\n";
+                    continue;
+                }
+
+                productos[totalProductos].stock = stockTemp;
+                break;
+
+            } while (true);
 
             totalProductos++;
             cout << "El producto fue agregado exitosamente." << endl;
@@ -302,13 +348,24 @@ void agregarProducto() {
             cout << "Límite de productos alcanzado." << endl;
             break;
         }
-        seguir = leerSN("\n¿Desea agregar otro producto? (S/N): ");
+
+        do {
+            cout << "\n¿Desea agregar otro producto? (S/N): ";
+            cin.ignore(1000, '\n');
+            cin >> seguir;
+            seguir = toupper(seguir);
+            if (seguir != 'S' && seguir != 'N') {
+                cout << "Opción inválida. Por favor ingrese solo 'S' o 'N'." << endl;
+            }
+        } while (seguir != 'S' && seguir != 'N');
+
     } while (seguir == 'S');
 
     cout << "\nRegresando al menú..." << endl;
     Sleep(1000);
     system("cls");
 }
+
 
 
 
@@ -356,7 +413,7 @@ void mostrarProductos() {
             cin >> opcionChar;
 
             if (opcionChar == '1' || opcionChar == '2' || opcionChar == '3') {
-                opcion = opcionChar - '0';
+                opcion = opcionChar - '0'; //los caracteres 0, 1, 2 y 3 valen respectivamente 48, 49, 50 y 51, esto es en codigo ASCII por lo cual al restar nos dara un valor entero para la variable "opcion"
                 break;
             } else {
                 cout << "\n---------------------------------------------------" << endl;
@@ -417,29 +474,36 @@ void mostrarProductos() {
 
 //Funcion para buscar los productos 
 void buscarProductos() {
-    int codigoBuscar;
     system("cls");
-    cout << "\n=== BUSCAR PRODUCTO POR CÓDIGO ===" << endl;
+    cout << "\n=== BUSCAR PRODUCTO ===" << endl;
 
-    bool codigoValido = false;
+    float codigoTemp;
+    int codigoBuscado;
+    bool codigoValido;
+
+    // Validar entrada del código
     do {
-        cout << "Ingrese el código del producto (100-199): ";
-        if (!(cin >> codigoBuscar)) {
-            cout << "Entrada inválida. Ingrese un número entero.\n";
+        cout << "Ingrese el código del producto a buscar (100-199): ";
+        if (!(cin >> codigoTemp)) {
+            cout << "Entrada inválida. Debe ingresar un número.\n";
             cin.clear();
             cin.ignore(1000, '\n');
             continue;
         }
-        if (codigoBuscar < 100 || codigoBuscar > 199) {
-            cout << "Código fuera de rango. Intente nuevamente.\n";
+
+        if (codigoTemp < 100 || codigoTemp > 199 || fmod(codigoTemp, 1) != 0) {
+            cout << "Código inválido. Debe ser un número entero entre 100 y 199.\n";
             continue;
         }
-        codigoValido = true;
-    } while (!codigoValido);
+
+        codigoBuscado = codigoTemp;
+        break;
+
+    } while (true);
 
     bool encontrado = false;
     for (int i = 0; i < totalProductos; i++) {
-        if (productos[i].codigo == codigoBuscar) {
+        if (productos[i].codigo == codigoBuscado) {
             cout << "\nProducto encontrado:" << endl;
             cout << "Código : " << productos[i].codigo << endl;
             cout << "Nombre : " << productos[i].nombre << endl;
@@ -456,160 +520,234 @@ void buscarProductos() {
         cout << "-----------------------------------" << endl;
     }
 
-    cin.ignore(); // limpiar salto de línea pendiente
-
     string Retorno;
-    cout << "\nRegresar al menu principal.......[1]" << endl;
+    cout << "\nRegresar al menú principal.......[1]" << endl;
+    cin.ignore();
     do {
         cout << "> ";
         getline(cin, Retorno);
         if (Retorno != "1") {
-            cout << "Opción inválida. Para regresar al Menu digite [1]" << endl;
+            cout << "Opción inválida. Para regresar al menú digite [1]" << endl;
         }
     } while (Retorno != "1");
 
-    cout << "\nRegresando al menu..." << endl;
+    cout << "\nRegresando al menú..." << endl;
     Sleep(1000);
     system("cls");
 }
 
 
+
 //Funcion para actualizar los productos 
 void actualizarProducto() {
-	string nombreBuscar;
-	system("cls");
+    system("cls");
     cout << "\n=== ACTUALIZAR PRODUCTO ===" << endl;
-    cout << "Ingrese el nombre del producto a actualizar: ";
-    cin.ignore();
-    getline(cin, nombreBuscar);
-    
+
+    float codigoTemp;
+    int codigoBuscar;
+
+    // Validación del código
+    do {
+        cout << "Ingrese el código del producto a actualizar (100-199): ";
+        if (!(cin >> codigoTemp)) {
+            cout << "Entrada inválida. Debe ingresar un número.\n";
+            cin.clear();
+            cin.ignore(1000, '\n');
+            continue;
+        }
+
+        if (codigoTemp < 100 || codigoTemp > 199 || fmod(codigoTemp, 1) != 0) {
+            cout << "Código inválido. Debe ser un número entero entre 100 y 199.\n";
+            continue;
+        }
+
+        codigoBuscar = codigoTemp;
+        break;
+    } while (true);
+
     bool buscado = false;
+    cin.ignore();
     for (int i = 0; i < totalProductos; i++) {
-        if (productos[i].nombre == nombreBuscar) {
-        	cout << endl;
-            cout << "***Producto encontrado***"<<endl; 
-			cout << "Datos actuales:" << endl;
+        if (productos[i].codigo == codigoBuscar) {
+            cout << "\n***Producto encontrado***\n";
+            cout << "Código: " << productos[i].codigo << endl;
             cout << "Nombre: " << productos[i].nombre << endl;
-            cout << "Precio: " << productos[i].precio << endl;
+            cout << "Precio: S/ " << productos[i].precio << endl;
             cout << "Stock: " << productos[i].stock << endl;
-            
+
             cout << "\nIngrese los nuevos datos:" << endl;
-            cout << "Nuevo nombre: ";
-            getline(cin, productos[i].nombre);
-            cout << "Nuevo precio: ";
-            cin >> productos[i].precio;
-            cout << "Nuevo stock: ";
-            cin >> productos[i].stock;
-            cin.ignore();
-            cout << "Producto actualizado exitosamente!" << endl;
-       		buscado = true;
-       		break;
-	    }
-	}
-	if (buscado == false) {
-    cout << "\n-----------------------------------" << endl;
-    cout << "¡Error! Producto no encontrado." << endl;
-    cout << "-----------------------------------" << endl;
-	}
-	
-	string Retorno;
-    cout<<"\nRegresar al menu principal.......[1]"<<endl;
-    //cin.ignore();
-    do{
-    	getline(cin, Retorno);
-    	if(Retorno != "1"){
-    		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
-    	}
-    }while(Retorno != "1");
-    
-	
-    cout<<"\nRegresando al menu..."<<endl;
-	Sleep(1000);
-	system("cls");
+
+            do {
+                cout << "Nuevo nombre: ";
+                getline(cin, productos[i].nombre);
+                if (productos[i].nombre == "") {
+                    cout << "El nombre no puede estar vacío. Intente de nuevo.\n";
+                }
+            } while (productos[i].nombre == "");
+
+            float precioTemp;
+            do {
+                cout << "Nuevo precio: ";
+                if (!(cin >> precioTemp)) {
+                    cout << "Entrada inválida. Debe ingresar un número.\n";
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    continue;
+                }
+                if (precioTemp <= 0) {
+                    cout << "El precio debe ser mayor a 0. Intente de nuevo.\n";
+                    continue;
+                }
+                productos[i].precio = precioTemp;
+                break;
+            } while (true);
+
+            float stockTemp;
+            do {
+                cout << "Nuevo stock: ";
+                if (!(cin >> stockTemp)) {
+                    cout << "Entrada inválida. Debe ingresar un número entero.\n";
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    continue;
+                }
+                if (stockTemp < 0 || fmod(stockTemp, 1) != 0) {
+                    cout << "El stock debe ser un número entero no negativo.\n";
+                    continue;
+                }
+                productos[i].stock = stockTemp;
+                break;
+            } while (true);
+
+            cout << "Producto actualizado exitosamente!\n";
+            buscado = true;
+            break;
+        }
+    }
+
+    if (!buscado) {
+        cout << "\n-----------------------------------" << endl;
+        cout << "¡Error! Producto no encontrado." << endl;
+        cout << "-----------------------------------" << endl;
+    }
+
+    string Retorno;
+    cout << "\nRegresar al menú principal.......[1]" << endl;
+    cin.ignore();
+    do {
+        getline(cin, Retorno);
+        if (Retorno != "1") {
+            cout << "Opción inválida. Para regresar al menú digite [1]" << endl;
+        }
+    } while (Retorno != "1");
+
+    cout << "\nRegresando al menú..." << endl;
+    Sleep(1000);
+    system("cls");
 }
+
+
 
 //Funcion para eliminar un productos
 void eliminarProducto() {
-	
-    string Nombre;
     system("cls");
     cout << "\n========== PRODUCTOS ACTUALES ==========\n";
     for (int i = 0; i < totalProductos; i++) {
         cout << "Producto " << i + 1 << ":\n";
-        cout << "Nombre: " << productos[i].nombre << endl;
-        cout << "Precio: S/ " << productos[i].precio << endl;
-        cout << "Stock: " << productos[i].stock << endl;
+        cout << "Código : " << productos[i].codigo << endl;
+        cout << "Nombre : " << productos[i].nombre << endl;
+        cout << "Precio : S/ " << productos[i].precio << endl;
+        cout << "Stock  : " << productos[i].stock << endl;
         cout << "------------------------------------------\n";
     }
-    cout << "\n=== ELIMINAR PRODUCTO ===" << endl;
-    cout << "Ingrese el nombre del producto a eliminar: ";
-    cin.ignore();
-    getline(cin, Nombre);
+
+    float codigoTemp;
+    int codigoEliminar;
+
+    // Validación del código
+    do {
+        cout << "\nIngrese el código del producto a eliminar (100-199): ";
+        if (!(cin >> codigoTemp)) {
+            cout << "Entrada inválida. Debe ingresar un número.\n";
+            cin.clear();
+            cin.ignore(1000, '\n');
+            continue;
+        }
+        if (codigoTemp < 100 || codigoTemp > 199 || fmod(codigoTemp, 1) != 0) {
+            cout << "Código inválido. Debe ser un número entero entre 100 y 199.\n";
+            continue;
+        }
+        codigoEliminar = codigoTemp;
+        break;
+    } while (true);
 
     for (int i = 0; i < totalProductos; i++) {
-        if (productos[i].nombre == Nombre) {
-            //Confirmar eliminar producto
+        if (productos[i].codigo == codigoEliminar) {
+            // Confirmar eliminación
             char confirmar;
             do {
-                cout << "¿Está seguro de eliminar el producto '" << Nombre << "'? (S/N): ";
+                cout << "¿Está seguro de eliminar el producto '" << productos[i].nombre << "'? (S/N): ";
                 cin >> confirmar;
                 confirmar = toupper(confirmar);
                 if (confirmar != 'S' && confirmar != 'N') {
                     cout << "Opción inválida. Debe ingresar S o N.\n";
                 }
             } while (confirmar != 'S' && confirmar != 'N');
-            
-            if (toupper(confirmar) != 'S') {
-                cout << "Eliminación cancelada." << endl;
-                cout<<"Regregando al MENU principal....";
+
+            if (confirmar != 'S') {
+                cout << "Eliminación cancelada.\n";
+                cout << "Regresando al menú principal..." << endl;
                 Sleep(1800);
                 system("cls");
                 return;
             }
 
+            // Eliminar producto desplazando el arreglo
             for (int j = i; j < totalProductos - 1; j++) {
                 productos[j] = productos[j + 1];
             }
             totalProductos--;
-            cout << "Producto eliminado." << endl;
-            
+
+            cout << "Producto eliminado exitosamente.\n";
+
             string Retorno;
-            cout<<"\nRegresar al menu principal.......[1]"<<endl;
+            cout << "\nRegresar al menú principal.......[1]\n";
             cin.ignore();
-            do{
-            	getline(cin, Retorno);
-    			if(Retorno != "1"){
-    				cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
-    			}
-            }while(Retorno != "1");
-            
-            cout<<"\nRegresando al menu..."<<endl;
-			Sleep(1000);
-			system("cls");
-            
+            do {
+                getline(cin, Retorno);
+                if (Retorno != "1") {
+                    cout << "Opción inválida. Para regresar al menú digite [1]\n";
+                }
+            } while (Retorno != "1");
+
+            cout << "\nRegresando al menú..." << endl;
+            Sleep(1000);
+            system("cls");
             return;
         }
     }
+
+    // Si no se encontró el producto
     cout << "\n-----------------------------------" << endl;
     cout << "¡Error! Producto no encontrado." << endl;
     cout << "-----------------------------------" << endl;
-    
+
     string Retorno;
-    cout<<"\nRegresar al menu principal.......[1]"<<endl;
-    
-    do{
-    	cout<<"> ";
-    	getline(cin, Retorno);
-    	if(Retorno != "1"){
-    		cout<<"Opcion inválida. Para regresar el Menu digite [1]"<<endl;
-    	}
-    }while(Retorno != "1");
-    
-	
-    cout<<"\nRegresando al menu..."<<endl;
-	Sleep(1000);
-	system("cls");
+    cout << "\nRegresar al menú principal.......[1]" << endl;
+    cin.ignore();
+    do {
+        cout << "> ";
+        getline(cin, Retorno);
+        if (Retorno != "1") {
+            cout << "Opción inválida. Para regresar al menú digite [1]" << endl;
+        }
+    } while (Retorno != "1");
+
+    cout << "\nRegresando al menú..." << endl;
+    Sleep(1000);
+    system("cls");
 }
+
 
 //Funcion para realizar una venta
 void realizarUnaVenta() {
